@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;  /* or any font you want */
+  background-color: #ffffff;             /* default background */
+  color: black;                        /* default text color */
+}
+.light {
+  background-color: white;
+  color: black;
+}
+
+.dark {
+  background-color: #121212;  /* dark gray / black */
+  color: white;
+}
+button {
+  cursor: pointer;
+  border: none;
+  padding: 8px 12px;
+  
+}

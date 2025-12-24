@@ -1,0 +1,87 @@
+.cards-container{
+    display: flex;
+   
+    margin-top: 60px;
+    flex-wrap: wrap;
+    gap: 20px;
+
+}
+.card{
+    background-color: white;
+    width: 250px;
+    padding: 20px;
+    border-radius: 16px;
+box-shadow: 0 0 5px rgba(80, 149, 255, 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    
+
+}
+.code{
+    width: 50px;
+    height: 50px;
+    background-color: #5095FF;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    
+    
+
+}
+.Name{
+    font-weight: 600;
+   
+}
+.card-btn{
+     display: flex;
+    flex-direction:row;
+    gap: 16px;
+    
+}
+
+
+.edit{
+    height: 35px;
+    width: 100px;
+    background-color: #5095FF;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+
+
+}
+.edit:hover{
+  background-color: #1c60c5;
+
+
+}
+.delete{
+    height: 35px;
+    background-color: #FB7185;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    width: 50px;
+
+
+
+}
+.delete:hover{
+  background-color: #b61e35;
+  
+
+}
+

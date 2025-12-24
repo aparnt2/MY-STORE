@@ -1,0 +1,25 @@
+{
+  "departments": [
+    { "id": 1, "code": "HR", "name": "Human Resources" },
+    { "id": 2, "code": "IT", "name": "Information Technology" },
+    { "id": 3, "code": "FIN", "name": "Finance" },
+    { "id": 4, "code": "MKT", "name": "Marketing" },
+    { "id": 5, "code": "OPS", "name": "Operations" }
+  ],
+
+  "categories": [
+    { "id": 1, "code": "ELE", "name": "Electronics" },
+    { "id": 2, "code": "FA", "name": "Fashion & Apparel" },
+    { "id": 3, "code": "HK", "name": "Home & Kitchen" },
+    { "id": 4, "code": "BP", "name": "Beauty & Personal Care" },
+    { "id": 5, "code": "SF", "name": "Sports & Fitness" }
+  ],
+
+  "roles": [
+    { "id": 1, "code": "MGR", "name": "Manager" },
+    { "id": 2, "code": "SD", "name": "Senior Developer" },
+    { "id": 3, "code": "JD", "name": "Junior Developer" },
+    { "id": 4, "code": "HRE", "name": "HR Executive" },
+    { "id": 5, "code": "AC", "name": "Accountant" }
+  ]
+}

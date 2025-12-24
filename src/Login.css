@@ -1,0 +1,170 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+/* Center container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Login card */
+.login-card {
+  position: relative;
+  width: 450px;
+  height: 470px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0px 2px 4px rgba(60, 114, 195, 0.25);
+  overflow: hidden;
+}
+
+/* Left stroke */
+.login-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  background: #5095ff;
+  border-radius: 16px;
+}
+
+.login-heading {
+  margin-bottom: 24px;
+}
+
+/* Inputs */
+.input-box {
+  width: 400px;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.email,
+.password {
+  width: 100%;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  height: 45px;
+  background-color: white;
+  color: black;
+  padding: 0 16px;
+  border-radius: 16px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+input:focus {
+  border-color: #5095ff;
+  box-shadow: 0 0 5px rgba(80, 149, 255, 0.4);
+}
+
+/* Password eye */
+.password-container {
+  position: relative;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+/* Buttons */
+.login-btn {
+  width: 170px;
+  height: 45px;
+  background: #5095ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background: #3c72c3;
+}
+
+.login-btn:focus {
+  outline: none;
+}
+
+/* Error */
+.error-text {
+  color: red;
+  font-size: 14px;
+}
+
+/* Divider */
+.divider {
+  margin: 16px 0;
+  color: #999;
+}
+
+/* Social login */
+.social-login {
+  display: flex;
+  gap: 16px;
+}
+
+.google-btn,
+.facebook-btn {
+  width: 170px;
+  height: 45px;
+  border-radius: 8px;
+  background: white;
+  color: black;
+  border: 1px solid #5095ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.google-btn:hover,
+.facebook-btn:hover {
+  background: #f5f8ff;
+}
+
+/* Signup */
+.signup-text {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.signup-text span {
+  color: #5095ff;
+  cursor: pointer;
+}
