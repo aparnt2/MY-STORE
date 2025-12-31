@@ -1,34 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import './Department.css'
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import './Department.css'
 
-function Department({departments}) {
-  
-  
 
+function Department({dep,onEdit,onDelete}) {
   return (
-    <div className='cards-container'>
-      {
-        departments.map(departments=>(
-              <div className='card' key={departments.id}>
-              <div className='code'>{departments.code}</div>
-              <div className='Name'>{departments.name}</div>
-              <div className='card-btn'> 
-                  <button className='edit'><FaEdit /> Edit</button>
-                  <button className='delete'><MdDelete size={20} /></button>
-              </div>
+    <div className='dept-container'>
+        {
+            dep.map(d=>(
+                <div className='card' key={d.id}>
+                    <div className='code'>{d.code}</div>
+                    <div  className='Name'>{d.name}</div>
+                    <div className='card-btn'> 
+                    <button className='edit' onClick={()=>onEdit(d)}><FaEdit/>Edit</button>
+                    <button className='delete' onClick={()=>onDelete(d.id)} ><MdDelete size={20} /></button>
+                    </div>
 
-            </div>
+                </div>
+            ))
 
-        ))
-      }
-            
-            
+        }
 
-
-
-          </div>
+      
+    </div>
   )
 }
 

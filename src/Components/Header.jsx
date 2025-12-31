@@ -12,7 +12,7 @@ function Header() {
               <h4>MyStore</h4>
               </div>
               <div className='logout-sec'>
-              <div className='user-info'>admin-user</div>
+              
               <div className='logout-icon'><LuLogOut className='logout' /></div>
                 
               </div>
