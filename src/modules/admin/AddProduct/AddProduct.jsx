@@ -22,13 +22,14 @@ function AddProduct() {
         <div className='heading'>
              <IoIosArrowBack className='back-icon' onClick={()=>navigate('/admin/dashboard')}/>
                 <h2>Add Product</h2>
-                
-
-
-
-
-                
-
+                <h2>Add Product</h2>
+                <h2>Add Product</h2>
+                <h2>Add Product</h2>
+                <h2>Add Product</h2>
+                <h2>Add Product</h2>
+                <h2>Add Product</h2>
+                <h2>Add Product</h2>
+                <h2>Add Product</h2>
 
         </div>
         <div className='body'>
