@@ -25,6 +25,11 @@ function AddProduct() {
                 
 
 
+
+
+                
+
+
         </div>
         <div className='body'>
             <div className='img-section'>
