@@ -1,0 +1,60 @@
+.modal-layout{
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.model{
+    background-color: white;
+    padding: 30px;
+    display: flex;
+    width: 300px;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: stretch;
+    box-shadow: 0,2,8 rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+}
+.model h3{
+    text-align: center;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+.content input{
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    border: 1px solid rgb(204, 204, 204);
+}
+.btn-section{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.btn-section .btn-cancel{
+    background-color: white;
+    width: 100px;
+    height: 40px;
+    border: 1px solid var(--primary);
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.btn-section .btn-save{
+    background-color: var(--primary);
+   border: none;
+    width: 100px;
+    height: 40px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: white;
+}
