@@ -31,6 +31,17 @@ function AdminDashboard() {
           <NavLink to="/admin/view-employee" className="menu-item">
             <FaPlus /> <span>View Employee</span> <FaArrowRight />
           </NavLink>
+
+
+
+
+
+
+
+
+
+
+          
         </aside>
 
         <main className="content">
