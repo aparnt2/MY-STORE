@@ -12,7 +12,7 @@ function Category({cat,onEdit,onDelete}) {
                    <div className='code'>{c.category_code}</div>
                    <div className='Name'>{c.category_name}</div>
                    <div className='card-btn'> 
-                     <button className='edit' onClick={()=>onEdit(c)} ><FaEdit /> Edit</button>
+                     <button className='edit' onClick={()=>onEdit(c)} ><FaEdit size={20}/> </button>
                      <button className='delete' onClick={()=>onDelete(c.category_id)} ><MdDelete size={20} /></button>
                  </div>
                </div>

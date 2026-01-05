@@ -11,7 +11,7 @@ function Role({roles,OnEdit,onDelete}) {
                 <div className='code'>{r.role_code}</div>
                 <div className='Name'>{r.role_name}</div>
                 <div className='card-btn'> 
-                  <button className='edit' onClick={()=>OnEdit(r)}><FaEdit /> Edit</button>
+                  <button className='edit' onClick={()=>OnEdit(r)}><FaEdit size={20}/> </button>
                   <button className='delete' onClick={()=>onDelete(r.role_id)} ><MdDelete size={20} /></button>
               </div>
             </div>

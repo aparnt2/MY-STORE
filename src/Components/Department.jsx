@@ -13,7 +13,7 @@ function Department({dep,onEdit,onDelete}) {
                     <div className='code'>{d.code}</div>
                     <div  className='Name'>{d.name}</div>
                     <div className='card-btn'> 
-                    <button className='edit' onClick={()=>onEdit(d)}><FaEdit/>Edit</button>
+                    <button className='edit' onClick={()=>onEdit(d)}><FaEdit size={20}/></button>
                     <button className='delete' onClick={()=>onDelete(d.id)} ><MdDelete size={20} /></button>
                     </div>
 

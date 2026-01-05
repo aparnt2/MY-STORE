@@ -13,6 +13,8 @@ import AddEditModal from '../../../Components/AddEditModal';
 
 function MasterData() {
     const navigate=useNavigate()
+    const BASE_URL=import.meta.env.VITE_BASE_URL
+    
     
     const[activetab,setactivetab]=useState("department")
     const[showAddModel,setShowAddModel]=useState(false)
@@ -52,9 +54,9 @@ useEffect(()=>{
       const data=async ()=>{
         try{
           setLoading(true)
-          const [deptres,roleres,catres]=await Promise.all([fetch('http://127.0.0.1:8000/department/'),
-                                                    fetch('http://127.0.0.1:8000/role/'),
-                                                    fetch('http://127.0.0.1:8000/category/')])
+          const [deptres,roleres,catres]=await Promise.all([fetch(`${BASE_URL}/department/`),
+                                                    fetch(`${BASE_URL}/role/`),
+                                                    fetch(`${BASE_URL}/category/`)])
 
           if(!deptres.ok ||!roleres.ok ||!catres.ok) throw new Error("error while fetching data")
 
@@ -89,7 +91,7 @@ useEffect(()=>{
       }
         if(editdept){
           //edit
-          const res=await fetch(`http://127.0.0.1:8000/department/${editdept.id}/update`,
+          const res=await fetch(`${BASE_URL}/department/${editdept.id}/update`,
             {
               method:'post',
               headers:{'Content-Type':'application/json'},
@@ -103,7 +105,7 @@ useEffect(()=>{
 
         }else{
           //new data save
-        const res=await fetch('http://127.0.0.1:8000/department/',
+        const res=await fetch(`${BASE_URL}/department/`,
           {
             method:'post',
             headers:{'Content-Type':'application/json'},
@@ -124,7 +126,7 @@ useEffect(()=>{
         return
       }if(editRole){
         //edit-role
-        const res=await fetch(`http://127.0.0.1:8000/role/${editRole.role_id}/update`,
+        const res=await fetch(`${BASE_URL}/role/${editRole.role_id}/update`,
           {
             method:'post',
             headers:{'Content-Type':'application/json'},
@@ -139,7 +141,7 @@ useEffect(()=>{
 
       }else{
         //add new-role
-        const res=await fetch(`http://127.0.0.1:8000/role/`,
+        const res=await fetch(`${BASE_URL}/role/`,
           {method:'post',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify({role_name:rname,role_code:rcode})
@@ -157,7 +159,7 @@ useEffect(()=>{
         return
       }
           if(editCategory){
-            const res=await fetch(`http://127.0.0.1:8000/category/${editCategory.category_id}/update`,
+            const res=await fetch(`${BASE_URL}/category/${editCategory.category_id}/update`,
               {
                 method:'post',
                 headers:{'Content-Type':'application/json'},
@@ -171,7 +173,7 @@ useEffect(()=>{
 
           }else{
             //add new-category
-            const res=await fetch(`http://127.0.0.1:8000/category/`,
+            const res=await fetch(`${BASE_URL}/category/`,
              { method:'post',
                 headers:{'Content-Type':'application/json'},
                 body:JSON.stringify({category_code:ccode,category_name:cname})
@@ -206,7 +208,7 @@ useEffect(()=>{
       const confirmdelete=window.confirm("Are You Sure You Want To Delete ")
       if(!confirmdelete)return
       try{
-        const res=await fetch(`http://127.0.0.1:8000/department/${id}/delete`)
+        const res=await fetch(`${BASE_URL}/department/${id}/delete`)
         if(!res.ok){
           throw new Error("Failled to deleted data")
         }
@@ -239,7 +241,7 @@ useEffect(()=>{
       const confirm=window.confirm("Do You want to delete this Role?")
       if(!confirm) return
       try{
-        const res=await fetch(`http://127.0.0.1:8000/role/${id}/delete`)
+        const res=await fetch(`${BASE_URL}/role/${id}/delete`)
         if(!res.ok) throw new Error("Error while deleting Role in backend")
         
         setRole(prev=>prev.filter(r=>r.role_id!==id))
@@ -264,7 +266,7 @@ const handilecateDelete=async (id)=>{
   const confirm=window.confirm("Do you want to delete this category")
   if(!confirm) return
   try{
-     const res=await fetch(`http://127.0.0.1:8000/category/${id}/delete`)
+     const res=await fetch(`${BASE_URL}/category/${id}/delete`)
      if(!res.ok) throw new Error("Error while deleting category")
       setCategory(prev=>prev.filter(c=>c.category_id!==id))
 

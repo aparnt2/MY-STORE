@@ -6,23 +6,25 @@
 html, body, #root {
   height: 100%;
   width: 100%;
-  font-family: 'Poppins', sans-serif;  /* or any font you want */
-  background-color: #ffffff;             /* default background */
-  color: black;
-  --primary:#5095FF;                        /* default text color */
+  font-family: 'Poppins', sans-serif;  
+  background-color: #ffffff;             
+  
+  --primary:#5095FF;
+  --text-primary: #111827; 
+  --text-on-primary: #FFFFFF;                       
 }
 .light {
-  background-color: white;
+  background-color: #ffffff;
   color: black;
 }
 
 .dark {
-  background-color: #121212;  /* dark gray / black */
-  color: white;
+  background-color: #121212;  
+  color: #111827;
 }
 button {
   cursor: pointer;
   border: none;
-  padding: 8px 12px;
-  
+  padding: 8px 12px; 
 }
+

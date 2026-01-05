@@ -1,60 +1,73 @@
-.modal-layout{
+.modal-layout {
     position: fixed;
     inset: 0;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 }
-.model{
-    background-color: white;
+
+/* Modal box */
+.model {
+    background-color: #ffffff;
+    width: 320px;
     padding: 30px;
     display: flex;
-    width: 300px;
     flex-direction: column;
     gap: 20px;
-    justify-content: space-between;
     align-items: stretch;
-    box-shadow: 0,2,8 rgba(0, 0, 0, 0.3);
+
     border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
-.model h3{
+
+.model h3 {
+    margin: 0;
     text-align: center;
+    font-weight: 600;
 }
+
+
 .content{
     display: flex;
     flex-direction: column;
     gap: 20px;
-
-}
-.content input{
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: none;
-    border: 1px solid rgb(204, 204, 204);
-}
-.btn-section{
-    display: flex;
-    flex-direction: row;
     align-items: center;
+    justify-content: center;
+}
+
+.content input{
+    width: 200px;
+    border-radius: 8px;
+}
+.btn-section {
+    display: flex;
     justify-content: center;
     gap: 20px;
 }
-.btn-section .btn-cancel{
-    background-color: white;
+
+/* Cancel button */
+.btn-section .btn-cancel {
     width: 100px;
     height: 40px;
+
+    background-color: #ffffff;
     border: 1px solid var(--primary);
-    padding: 8px 16px;
     border-radius: 8px;
+
+    cursor: pointer;
 }
 
-.btn-section .btn-save{
-    background-color: var(--primary);
-   border: none;
+/* Save button */
+.btn-section .btn-save {
     width: 100px;
     height: 40px;
-    padding: 8px 16px;
+
+    background-color: var(--primary);
+    border: none;
     border-radius: 8px;
-    color: white;
+    color: #ffffff;
+
+    cursor: pointer;
 }
