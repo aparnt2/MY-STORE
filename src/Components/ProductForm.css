@@ -84,15 +84,18 @@
   color: #333;
 }
 
-.add-product-section input,
+.add-product-section input,textarea,
 .add-product-section select {
-  height: 45px;
+  height: 30px;
    width: 100%;
   padding: 0 14px;
-  border-radius: 12px;
+  border-radius: 8px;
   border: 1px solid #ccc;
   outline: none;
   font-size: 14px;
+}
+textarea{
+  height: 55px;
 }
 
 .add-product-section select {
@@ -101,7 +104,8 @@
 
 /* Focus effect */
 .add-product-section input:focus,
-.add-product-section select:focus {
+.add-product-section select:focus,
+.add-product-section textarea:focus {
   border-color: #5095ff;
   box-shadow: 0 0 4px rgba(80, 149, 255, 0.35);
 }
