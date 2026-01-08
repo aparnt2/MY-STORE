@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import Header from '../../../Components/Header'
-import ProductForm from '../../../Components/ProductForm'
+import Header from '../../../Components/Header/Header'
+import ProductForm from '../../../Components/ProductForm/ProductForm'
 import { IoIosArrowBack } from "react-icons/io"
 
 function EditProduct() {

@@ -1,0 +1,17 @@
+.add-emplyee{
+    padding: 20px 80px;
+}
+.btn-addemployee{
+    margin-top:20px ;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.btn-addemployee button{
+    
+    height: 40px;
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 16px;
+}

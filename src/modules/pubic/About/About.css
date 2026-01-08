@@ -1,0 +1,7 @@
+.about-container{
+    padding: 20px 80px;
+}
+.vison-mission{
+    display: flex;
+    flex-direction: row;
+}

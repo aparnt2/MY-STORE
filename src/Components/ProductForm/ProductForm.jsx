@@ -7,7 +7,8 @@ function ProductForm({
   categories = [],
   onSubmit,
   submitText
-}) {
+}) 
+{
   const [formData, setFormData] = useState({
     product_name: "",
     price: "",
@@ -24,14 +25,14 @@ function ProductForm({
 
   useEffect(() => {
     setFormData({
-      product_name: initialData.product_name || "",
-      price: initialData.price || "",
-      stock: initialData.stock || "",
-      description: initialData.description || ""
+      product_name: initialData.product_name ?? "",
+      price: initialData.price ?? "",
+      stock: initialData.stock ?? "",
+      description: initialData.description ?? ""
     })
 
-    setSelectedCate(initialData.category_id || "")
-    setImgPreview(initialData.image_url || null)
+    setSelectedCate(initialData.category_id ?? "")
+    setImgPreview(initialData.image_url ?? null)
   }, [initialData])
 
   const handleImage = (e) => {

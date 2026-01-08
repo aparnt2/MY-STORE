@@ -1,0 +1,20 @@
+.footer{
+    border-top: 1px solid #e5e7eb;
+    margin-top: 40px;
+}
+.footer-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:50px;
+    padding:20px 80px
+}
+.footer-col h2,h4,p{
+    margin-top: 20px;
+   
+    
+}
+.footer-bottom{
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+}

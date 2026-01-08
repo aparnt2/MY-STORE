@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
-import Header from '../../../Components/Header'
+import Header from '../../../Components/Header/Header'
 import './MasterData.css'
-import Department from '../../../Components/Department'
-import Role from '../../../Components/Role';
-import Category from '../../../Components/Category';
-import AddButton from '../../../Components/AddButton';
-import AddEditModal from '../../../Components/AddEditModal';
+import Department from '../../../Components/Department/Department'
+import Role from '../../../Components/Role/Role';
+import Category from '../../../Components/Category/Category';
+import AddButton from '../../../Components/AddButton/AddButton';
+import AddEditModal from '../../../Components/AddEditModel/AddEditModal';
 
 
 

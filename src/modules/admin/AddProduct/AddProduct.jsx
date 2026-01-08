@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../../../Components/Header'
+import Header from '../../../Components/Header/Header'
 import { IoIosArrowBack } from "react-icons/io"
 import { useNavigate } from 'react-router-dom'
-import ProductForm from '../../../Components/ProductForm'
+import ProductForm from '../../../Components/ProductForm/ProductForm'
 import './AddProduct.css'
 
 function AddProduct() {
