@@ -9,7 +9,11 @@ function Category({cat,onEdit,onDelete}) {
               {
                 cat.map(c=>(
                   <div className='card' key={c.category_id}>
-                   <div className='code'>{c.category_code}</div>
+                    <div className='image-wrapper'>
+                      <img src={c.image_url} alt={c.category_name} />
+
+                    </div>
+                   
                    <div className='Name'>{c.category_name}</div>
                    <div className='card-btn'> 
                      <button className='edit' onClick={()=>onEdit(c)} ><FaEdit size={20}/> </button>

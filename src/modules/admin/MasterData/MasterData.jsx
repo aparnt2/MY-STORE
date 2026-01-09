@@ -44,8 +44,11 @@ function MasterData() {
     //add category name and code
     const[ccode,setCcode]=useState("")
     const[cname,setCname]=useState("")
+    const [imageFile, setImageFile] = useState(null);
+
     //Edit-category
     const[editCategory,setEditCategory]=useState(null)
+
     
 
 
@@ -153,40 +156,59 @@ useEffect(()=>{
       setRole(prev=>[...prev,roledata])
       }}
       //save Category data
-      else if(activetab==='category'){
-        if(!cname ||!ccode){
-        alert(' category name and code are required')
-        return
-      }
-          if(editCategory){
-            const res=await fetch(`${BASE_URL}/category/${editCategory.category_id}/update`,
-              {
-                method:'post',
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({category_code:ccode,category_name:cname})
-              }
-              
-            )
-            if(!res.ok)alert("error while editing category data in backend")
-            const catedata=await res.json()
-            setCategory(prev=>prev.map(c=>(c.category_id===editCategory.category_id?catedata:c)))
+      if(activetab==='category') {
+    if(!cname || !ccode) {
+        alert('Category name and code are required');
+        return;
+    }
 
-          }else{
-            //add new-category
-            const res=await fetch(`${BASE_URL}/category/`,
-             { method:'post',
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({category_code:ccode,category_name:cname})
+    let imageUrl = editCategory?.image_url || ''
 
-             }
+if (imageFile) {
+    const formData = new FormData();
+    formData.append('upload_file', imageFile); 
 
-            )
-            if(!res.ok) throw new Error("Error while saving category data")
-              const catdata=await res.json()
-            setCategory(prev=>[...prev,catdata])
-          }
+    const uploadRes = await fetch(`${BASE_URL}/files/uploadfile`, {
+        method: 'POST',
+        body: formData, 
+    });
 
-      }
+    if (!uploadRes.ok) throw new Error("Image upload failed");
+
+    const uploadData = await uploadRes.json();
+    imageUrl = uploadData.image_url; 
+}
+
+
+    const payload = {
+        category_code: ccode,
+        category_name: cname,
+        image_url: imageUrl
+    };
+
+    if(editCategory) {
+        const res = await fetch(`${BASE_URL}/category/${editCategory.category_id}/update`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        if(!res.ok) throw new Error("Error while editing category");
+        const catedata = await res.json();
+        setCategory(prev => prev.map(c => (c.category_id === editCategory.category_id ? catedata : c)));
+    } else {
+        const res = await fetch(`${BASE_URL}/category/`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        if(!res.ok) throw new Error("Error while saving category");
+        const catdata = await res.json();
+        setCategory(prev => [...prev, catdata]);
+    }
+
+    setImageFile(null); // reset file after saving
+}
+
         setShowAddModel(false);
             setName('');
             setCode('');
@@ -292,7 +314,7 @@ const handilecateDelete=async (id)=>{
         </div>
         <AddButton onAdd={()=>{ if(activetab==='department'){setEditdept(null);setName('');setCode('')}
                                 else if(activetab==='role'){setEditRole(null);setRcode('');setRname('')}
-                                else if(activetab==='category'){setEditCategory(null) ;setCcode('');setCname('')}
+                                else if(activetab==='category'){setEditCategory(null) ;setCcode('');setCname('');setImageFile(null);}
                                 setShowAddModel(true);}}/>
         
         
@@ -336,6 +358,9 @@ const handilecateDelete=async (id)=>{
               setCname={setCname}
               ccode={ccode}
               setCcode={setCcode}
+               imageFile={imageFile}         
+              setImageFile={setImageFile}  
+              editCategory={editCategory}
               onClose={() => setShowAddModel(false)} 
               onSave={handileSave}        
             />

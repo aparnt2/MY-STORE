@@ -1,3 +1,4 @@
+/* Overlay */
 .modal-layout {
     position: fixed;
     inset: 0;
@@ -5,69 +6,123 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 50;
 }
 
 /* Modal box */
 .model {
     background-color: #ffffff;
-    width: 320px;
-    padding: 30px;
+    width: 400px;
+    max-width: 90%;
+    padding: 28px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-items: stretch;
-
     border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .model h3 {
     margin: 0;
     text-align: center;
     font-weight: 600;
+    font-size: 1.25rem;
 }
 
-
-.content{
+.content {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     align-items: center;
-    justify-content: center;
 }
 
-.content input{
-    width: 200px;
+.content input {
+    width: 300px;
+    max-width: 320px;
+    padding: 8px 12px;
     border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
 }
+
+/* Smaller Image Upload Section */
+.image-upload-container {
+    width: 100%;
+    max-width: 320px;
+    height: 120px;
+  
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(59, 130, 246, 0.05);
+    cursor: pointer;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+
+.upload-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.upload-icon {
+    font-size: 28px;
+    color: #3b82f6;
+}
+
+.upload-placeholder p {
+    margin: 8px 0 4px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.upload-placeholder small {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.image-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+/* Buttons */
 .btn-section {
     display: flex;
     justify-content: center;
     gap: 20px;
+    margin-top: 8px;
 }
 
-/* Cancel button */
-.btn-section .btn-cancel {
+.btn-cancel {
     width: 100px;
     height: 40px;
-
     background-color: #ffffff;
-    border: 1px solid var(--primary);
+    border: 1px solid #3b82f6;
     border-radius: 8px;
-
     cursor: pointer;
 }
 
-/* Save button */
-.btn-section .btn-save {
+.btn-save {
     width: 100px;
     height: 40px;
-
-    background-color: var(--primary);
+    background-color: #3b82f6;
     border: none;
     border-radius: 8px;
     color: #ffffff;
-
     cursor: pointer;
 }
