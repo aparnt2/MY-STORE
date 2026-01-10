@@ -29,16 +29,15 @@
     font-size: 1.25rem;
 }
 
-.content {
+.model-form {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    align-items: center;
+    align-items: stretch;
 }
 
-.content input {
-    width: 300px;
-    max-width: 320px;
+.model-form input {
+    width: 100%;
     padding: 8px 12px;
     border-radius: 8px;
     border: 1px solid #ccc;

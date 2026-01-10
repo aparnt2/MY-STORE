@@ -29,32 +29,32 @@ function AddProduct() {
     return data.image_url
   }
 
-  const handleAddProduct = async (data) => {
-    if (!data.imageFile || !data.category_id) {
-      alert("Image and category are required")
-      return
-    }
-
-    const image_url = await uploadImage(data.imageFile)
-
-    const payload = {
-      product_name: data.product_name,
-      price: Number(data.price),
-      stock: Number(data.stock),
-      description: data.description,
-      image_url,
-      category_id: Number(data.category_id)
-    }
-
-    await fetch(`${BASE_URL}/product/`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-
-    alert("Product added successfully")
-    
+ const handleAddProduct = async (data) => {
+  if (!data.imageFile || !data.category_id) {
+    alert("Image and category are required")
+    return false
   }
+
+  const image_url = await uploadImage(data.imageFile)
+
+  const payload = {
+    product_name: data.product_name,
+    price: Number(data.price),
+    stock: Number(data.stock),
+    description: data.description,
+    image_url,
+    category_id: Number(data.category_id)
+  }
+
+  await fetch(`${BASE_URL}/product/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+
+  alert("Product added successfully")
+  return true   
+}
 
   return (
     <>

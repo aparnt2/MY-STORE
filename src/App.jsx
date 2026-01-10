@@ -11,7 +11,8 @@ import AddEmployee from "./modules/admin/AddEmployee/AddEmployee"
 import ViewEmployee from "./modules/admin/ViewEmployee/ViewEmployee"
 import EditEmployee from "./modules/admin/EditEmployee/EditEmployee"
 import About from "./modules/pubic/About/About"
-import Contact from "./modules/pubic/Contact/contact"
+import Contact from "./modules/pubic/Contact/Contact"
+import ProductDisplay from "./modules/pubic/Home/ProductDisplay"
 function App() {
   
 
@@ -32,6 +33,7 @@ function App() {
       <Route path='/admin/edit-employee' element={<EditEmployee/>}/>
       <Route path='/about' element={<About/>}/>
       <Route path="/contact" element={<Contact/>}/>
+      <Route path='/products' element={<ProductDisplay/>}/>
 
      </Routes>
      

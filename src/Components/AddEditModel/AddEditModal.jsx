@@ -48,7 +48,7 @@ function AddEditModal({
           {activetab === 'category' && 'Add Category'}
         </h3>
 
-        <div className='content'>
+        <div className='model-form'>
           {/* Department Inputs */}
           {activetab === 'department' && (
             <>

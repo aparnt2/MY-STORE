@@ -68,14 +68,29 @@ const validate = () => {
 }
 
 
-  const handleSubmit = () => {
-    if (!validate()) return
-    onSubmit({
-      ...formData,
-      category_id: selectedCate,
-      imageFile
+ const handleSubmit = async () => {
+  if (!validate()) return
+
+  const success = await onSubmit({
+    ...formData,
+    category_id: selectedCate,
+    imageFile
+  })
+
+  if (success) {
+    
+    setFormData({
+      product_name: "",
+      price: "",
+      stock: "",
+      description: ""
     })
+    setSelectedCate("")
+    setImgPreview(null)
+    setImageFile(null)
+    setErrors({})
   }
+}
 
   return (
     <div className='content'>

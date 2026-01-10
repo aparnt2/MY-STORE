@@ -1,7 +1,75 @@
-.about-container{
-    padding: 20px 80px;
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 64px 80px;
+  color: #0f172a;
 }
-.vison-mission{
-    display: flex;
-    flex-direction: row;
+
+/* Headings */
+.about-container h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  color: #0f172a;
+}
+
+.about-container h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* Paragraphs */
+.about-container p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #334155;
+}
+
+/* Top intro section */
+.about-container > div:first-child {
+  margin-bottom: 48px;
+}
+
+/* Story section */
+.about-content {
+  margin-bottom: 64px;
+}
+
+/* Vision / Mission */
+.vison-mission {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+/* Cards */
+.mission,
+.vison {
+  background: #f8fafc;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mission:hover,
+.vison:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-container {
+    padding: 40px 24px;
+  }
+
+  .vison-mission {
+    grid-template-columns: 1fr;
+  }
+
+  .about-container h2 {
+    font-size: 26px;
+  }
 }
