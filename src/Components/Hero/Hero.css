@@ -42,4 +42,6 @@
     padding: 10px 16px;
     border: none;
 }
-
+.hero-content button:hover{
+    background-color: var(--primary-hover);
+}

@@ -1,10 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./ProductByCategory.css";
+import { useNavigate } from "react-router-dom";
+
 
 function ProductByCategory() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const [category, setCategory] = useState([]);
-  const scrollRef = useRef(null);
+  const scrollItems=[...category,...category]
+  const navigate = useNavigate();
+
+  const handleCategoryClick=(id)=>{
+     navigate('/products', { state: { categoryId: id } });
+
+  }
+
 
   useEffect(() => {
     const fetchdata = async () => {
@@ -18,15 +27,10 @@ function ProductByCategory() {
       }
     };
     fetchdata();
+    
   }, []);
 
-  const scrollLeft = () => {
-    scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
-  };
-
-  const scrollRight = () => {
-    scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
-  };
+  
 
   return (
     <section className="product-by-category">
@@ -39,29 +43,27 @@ function ProductByCategory() {
             <p>Explore our wide range of categories</p>
           </div>
 
-          <div className="nav-arrows">
-            <button className="scroll-btn" onClick={scrollLeft}>
-              ◀
-            </button>
-            <button className="scroll-btn" onClick={scrollRight}>
-              ▶
-            </button>
-          </div>
+         
         </div>
 
-        {/* Scroll Area */}
-        <div className="scroll-wrapper">
-          <div className="categories-scroll" ref={scrollRef}>
-            {category.map((item) => (
-              <div className="category-card" key={item.id}>
-                <div className="card-inner">
-                  <div className="card-image">
-                    <img src={item.image_url} alt={item.category_name} />
+        {/* Auto Scroll Area */}
+        <div className="marquee">
+          <div className="marquee-track" >
+            {scrollItems.map((item,i) => (
+                <div
+                  className="category-card"
+                  key={i}
+                  onClick={() => handleCategoryClick(item.category_id)}
+                >
+                  <div className="card-inner">
+                    <div className="card-image">
+                      <img src={item.image_url} alt={item.category_name} />
+                    </div>
                   </div>
+                  <p className="card-name">{item.category_name}</p>
                 </div>
-                <p className="card-name">{item.category_name}</p>
-              </div>
-            ))}
+              ))}
+
           </div>
         </div>
 

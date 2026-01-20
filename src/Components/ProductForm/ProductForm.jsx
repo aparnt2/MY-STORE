@@ -26,8 +26,8 @@ function ProductForm({
   useEffect(() => {
     setFormData({
       product_name: initialData.product_name ?? "",
-      price: initialData.price ?? "",
-      stock: initialData.stock ?? "",
+      price: initialData.price != null ? String(initialData.price) : "",
+      stock: initialData.stock != null ? String(initialData.stock) : "",
       description: initialData.description ?? ""
     })
 

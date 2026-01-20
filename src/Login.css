@@ -42,7 +42,7 @@ html, body, #root {
   top: 8px;
   bottom: 8px;
   width: 4px;
-  background: #5095ff;
+  background:var(--primary);
   border-radius: 16px;
 }
 
@@ -83,7 +83,7 @@ input {
 }
 
 input:focus {
-  border-color: #5095ff;
+  border-color: var(--primary);
   box-shadow: 0 0 5px rgba(80, 149, 255, 0.4);
 }
 
@@ -105,7 +105,7 @@ input:focus {
 .login-btn {
   width: 170px;
   height: 45px;
-  background: #5095ff;
+  background:var(--primary);
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -113,7 +113,7 @@ input:focus {
 }
 
 .login-btn:hover {
-  background: #3c72c3;
+  background: var(--primary-hover)
 }
 
 .login-btn:focus {
@@ -145,7 +145,7 @@ input:focus {
   border-radius: 8px;
   background: white;
   color: black;
-  border: 1px solid #5095ff;
+  border: 1px solid var(--primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,6 +165,6 @@ input:focus {
 }
 
 .signup-text span {
-  color: #5095ff;
+  color:var(--primary);
   cursor: pointer;
 }

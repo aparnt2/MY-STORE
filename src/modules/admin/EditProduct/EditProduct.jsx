@@ -89,7 +89,7 @@ function EditProduct() {
       <div className='heading'>
         <IoIosArrowBack
           className='back-icon'
-          onClick={() => navigate('/admin/view-product')}
+          onClick={() => navigate('/view-product')}
         />
         <h3>Edit Product</h3>
       </div>

@@ -25,7 +25,7 @@ header{
 }
 .logo-icon{
     font-size: 20px;    
-    color: #5095FF;
+    color: var(--primary);
 }
 .user-info{
     display: flex;
@@ -47,5 +47,5 @@ header{
 .logout{
     background-color: white;
     font-size: 20px;
-    color: #5095FF;
+    color: var(--primary);
 }

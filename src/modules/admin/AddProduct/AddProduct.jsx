@@ -63,7 +63,7 @@ function AddProduct() {
       <div className='heading'>
         <IoIosArrowBack
           className='back-icon'
-          onClick={() => navigate('/admin/dashboard')}
+          onClick={() => navigate('/dashboard')}
         />
         <h3>Add Product</h3>
       </div>

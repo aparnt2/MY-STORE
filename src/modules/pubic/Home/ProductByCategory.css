@@ -1,4 +1,26 @@
+.marquee {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
 
+.marquee-track{
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: scroll 30s linear infinite                       ;
+}
+.marquee:hover .marquee-track{
+  animation-play-state: paused;
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
 
 .product-by-category {
    padding: 20px 80px;
@@ -46,88 +68,15 @@
   margin-top: 4px;
 }
 
-/* Navigation Arrows */
-.nav-arrows {
-  display: flex;
-  gap: 8px;
-}
 
-.scroll-btn {
-  padding: 10px;
-  border-radius: 50%;
-  background-color: #ffffff;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-.scroll-btn:hover {
-  background-color:var(--primary);
-  color: white;
-  border-color:var(--primary);
-}
 
-.scroll-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-}
 
-.scroll-btn:disabled:hover {
-  background-color: #ffffff;
-  color: inherit;
-  border-color: #e5e7eb;
-}
 
-/* Scroll Wrapper */
-.scroll-wrapper {
-  position: relative;
-}
 
-.fade-left,
-.fade-right {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 64px;
-  z-index: 10;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
 
-.fade-left {
-  left: 0;
-  background: linear-gradient(to right, #fafafa, transparent);
-}
 
-.fade-right {
-  right: 0;
-  background: linear-gradient(to left, #fafafa, transparent);
-}
 
-.fade-left.visible,
-.fade-right.visible {
-  opacity: 1;
-}
-
-/* Categories Scroll */
-.categories-scroll {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 8px 4px;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-.categories-scroll::-webkit-scrollbar {
-  display: none;
-}
 
 /* Category Card */
 .category-card {

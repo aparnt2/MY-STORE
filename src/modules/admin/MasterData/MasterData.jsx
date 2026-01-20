@@ -307,7 +307,7 @@ const handilecateDelete=async (id)=>{
         
         
         <div className='tabs'>
-          <IoIosArrowBack className='back-icon' onClick={()=>navigate('/admin/dashboard')}/>
+          <IoIosArrowBack className='back-icon' onClick={()=>navigate('/dashboard')}/>
             <span onClick={()=>setactivetab('department')} className={activetab==='department'?"tab-active":"tab"}>Department</span>
             <span onClick={()=>setactivetab('role')} className={activetab==='role'?"tab-active":"tab"}>Role</span>
             <span onClick={()=>setactivetab('category')} className={activetab==='category'?"tab-active":"tab"}>Category</span>
@@ -319,10 +319,11 @@ const handilecateDelete=async (id)=>{
         
         
         <div className='main-content'>
-          
-          {
-            loading&& <h4>Loading.......</h4>
-          }
+          {loading && (
+            <div className="loader-wrapper">
+              <span className="loader"></span>
+            </div>
+          )}
           {
             error && <h4>{error}</h4>
           }

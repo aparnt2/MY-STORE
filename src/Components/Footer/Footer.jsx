@@ -15,7 +15,8 @@ function Footer() {
             <div className='footer-col'>
                 <h4>About Us</h4>
                 <Link to='/about'>About MYSTORE</Link>
-                <p>Products</p>
+                
+                <Link to='/products'>View Products</Link>
 
             </div>
             <div className='footer-col'>

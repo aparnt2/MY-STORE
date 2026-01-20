@@ -3,10 +3,12 @@ import.meta.env
 import Header from '../../../Components/Header/Header'
 import { useNavigate } from 'react-router-dom'
 import { IoIosArrowBack } from "react-icons/io";
-import { FaEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
+
 import './ViewProduct.css'
-import { CiSearch } from "react-icons/ci";
+import Filter from '../../../Components/Filter/Filter';
+import Search from '../../../Components/Search/Search';
+import ProductCard from '../../../Components/ProductCard/ProductCard';
+
 
 function ViewProduct() {
    const BASE_URL = import.meta.env.VITE_BASE_URL
@@ -56,10 +58,17 @@ function ViewProduct() {
 
     useEffect(()=>{
       const fetCategory=async ()=>{
-        const res=await fetch(`${BASE_URL}/category`)
+        try{
+           const res=await fetch(`${BASE_URL}/category`)
         const data=await res.json()
         setcategory(data.categories)
 
+        }catch(error){
+          console.log('error while fetching categories');
+          
+
+        }
+       
       }
       fetCategory()
     },[])
@@ -86,33 +95,21 @@ function ViewProduct() {
         <Header/>
         <div className='viewproduct-body'>
             <div className='tab'>
-                         <IoIosArrowBack className='back-icon' onClick={()=>navigate('/admin/dashboard')}/>
+                         <IoIosArrowBack className='back-icon' onClick={()=>navigate('/dashboard')}/>
                           <h3>Products</h3>              
             </div>
             <div className='search-sort'>
-               <div className='cate-sort'>
-                <select value={selectedCate}  onChange={(e)=>setSelectedCate(e.target.value)}>
-                  <option value=""> All</option>
-                  {
-                    category.map(c=>(
-                      <option key={c.category_id} value={c.category_id}>{c.category_name}</option>
-                    ))
-                  }
-                </select>
-                
-
-              </div>
-              <div className='search'>
-                <CiSearch  className='search-icon'/><input type="text" placeholder='Search' value={searchterm} onChange={(e)=>setSearchterm(e.target.value)}  />
-
-              </div>
-             
+              <Filter selectedCate={selectedCate} setSelectedCate={setSelectedCate} category={category}/>
+              <Search searchterm={searchterm} setSearchterm={setSearchterm}/>
+              
 
             </div>
             <div className='productlist'>
-                {
-                    loading && <h4>Loading........</h4>
-                }
+                {loading && (
+            <div className="loader-wrapper">
+              <span className="loader"></span>
+            </div>
+          )}
                 {
                   error && <h4>{error}</h4>
                 }
@@ -121,22 +118,9 @@ function ViewProduct() {
                     <>
                     {
                       products.map(p=>(
-                        <div className='product' key={p.product_id}>
-                          <img src={p.image_url} alt={p.product_name} className='image-display'/>
-                          <h4>{p.product_name}</h4>
-                          <div className='category'>{p.category.category_name }</div>
-
-                          <div className='price-stock'>
-                            <h2>{p.price}</h2>
-                            <p>stock :{p.stock}</p>
-                            
-
-                          </div>
-                          <div className='edit-delete'>
-                            <button className='edit' onClick={()=>navigate('/admin/edit-product', { state: { product: p } })} ><FaEdit size={20}/></button>
-                            <button className='delete' onClick={()=>handiledelete(p.product_id)} ><MdDelete size={20} /></button>
-
-                          </div>
+                         <div  key={p.product_id}>
+                          <ProductCard p={p} handiledelete={handiledelete} navigate={navigate}/>
+                          
                         </div>
                       ))
                     }

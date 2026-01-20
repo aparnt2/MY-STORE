@@ -1,24 +1,24 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import "./login.css";
-import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-function Login() {
-  const [uname, setUname] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const BASE_URL=import.meta.env.VITE_BASE_URL
+function Sign_up() {
+const[uname,setUname]=useState('')
+const[password,setPassword]=useState('')
+const [showPassword, setShowPassword] = useState(false);
+const [error, setError] = useState("");
+const [loading, setLoading] = useState(false);
+const BASE_URL=import.meta.env.VITE_BASE_URL
+
 
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+ const handleSignup = async () => {
   if (!uname || !password) {
-    setError("Username and Password are required");
+    setError("Username and password required");
     return;
   }
 
@@ -26,40 +26,32 @@ function Login() {
   setError("");
 
   try {
-    const res = await fetch(`${BASE_URL}/token`, {
+    const res = await fetch(`${BASE_URL}/user`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
         username: uname,
         password: password,
       }),
     });
 
-    const data = await res.json();
+    const signup = await res.json();
 
     if (!res.ok) {
-      throw new Error(data.detail || "Login failed");
+      throw new Error(data.detail || "Signup failed");
     }
 
-    localStorage.setItem("access_token", data.access_token);
-    localStorage.setItem("system_role_id", data.system_role_id);
-
-    const role = data.system_role_id;
-
-    switch (role) {
-      case 1:
-        navigate("/dashboard");
-      case 2:
-        navigate("/dashboard");
-        break;
-      case 3:
-        navigate("/home");
-        break;
-      default:
-        navigate("/");
-    }
+    const roleres=await fetch(`http://127.0.0.1:8000/user-role/`,
+            {
+                method:'post',
+                headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({user_id:signup.user_id,sr_id:3})
+            }
+        )
+        const roleid=await roleres.json()
+        console.log(signup);
+        console.log(roleid);
+        navigate('/')
 
   } catch (err) {
     setError(err.message);
@@ -68,11 +60,10 @@ function Login() {
   }
 };
 
-
   return (
     <div className="container">
       <div className="login-card">
-        <h2 className="login-heading">Login</h2>
+        <h2 className="login-heading">Sign Up</h2>
 
         <div className="input-box">
           {/* Email */}
@@ -80,7 +71,7 @@ function Login() {
             <label>User Name</label>
             <input
               type="text"
-              placeholder="Your email"
+              placeholder="User Name"
               value={uname}
               onChange={(e) => setUname(e.target.value)}
             />
@@ -105,9 +96,9 @@ function Login() {
             </div>
           </div>
 
-          {/* Login button */}
-          <button className="login-btn" onClick={handleLogin} disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+        
+          <button className="login-btn" onClick={handleSignup} disabled={loading}>
+            {loading ? "Signing Up...." : "Sign Up"}
           </button>
         </div>
 
@@ -128,11 +119,11 @@ function Login() {
         </div>
 
         <p className="signup-text">
-          Don’t have an account? <Link to="sign_up">Sign up</Link>
+          already have an account?<Link to='/'>Log in</Link>
         </p>
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Sign_up;
