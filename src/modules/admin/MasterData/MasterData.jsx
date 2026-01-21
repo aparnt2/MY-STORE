@@ -302,7 +302,7 @@ const handilecateDelete=async (id)=>{
 
 
   return (
-    <div>
+    <div className='main-page'>
         <Header/>
         
         

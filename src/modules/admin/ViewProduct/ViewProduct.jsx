@@ -34,6 +34,7 @@ function ViewProduct() {
         
         try{
           setLoading(true)
+          setError("")
           let URL=`${BASE_URL}/product/`
           if(searchterm){
             URL= `${BASE_URL}/product/search?keyword=${searchterm}`

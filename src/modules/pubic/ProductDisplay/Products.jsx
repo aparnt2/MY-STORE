@@ -88,7 +88,7 @@ function Products() {
 
   // ================= UI =================
   return (
-    <div>
+    <div className='product-page' >
       <Header />
 
       <div className='viewproduct-body'>

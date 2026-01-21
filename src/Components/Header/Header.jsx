@@ -4,6 +4,10 @@ import { FaShop } from "react-icons/fa6";
 import './Header.css'
 
 function Header() {
+  const handilelogout=()=>{
+    
+
+  }
   return (
     
           <header>
@@ -13,7 +17,8 @@ function Header() {
               </div>
               <div className='logout-sec'>
               
-              <div className='logout-icon'><LuLogOut className='logout' /></div>
+              <div className='logout-icon' onClick={handilelogout}><LuLogOut className='logout' /></div>
+
                 
               </div>
           </header>

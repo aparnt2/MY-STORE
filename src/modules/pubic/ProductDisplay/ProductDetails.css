@@ -1,7 +1,12 @@
+.details-page{
+   background-color: #f8fafc;
+
+}
 .product-details-page {
   max-width: 1200px;
   margin: 0 auto;
   padding: 32px 20px 80px;
+ 
 }
 
 .back-row {

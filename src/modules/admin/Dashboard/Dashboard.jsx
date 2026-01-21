@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa"; 
 import './dashboard.css'
 import { useEffect } from "react";
+import DashboardStats from "../../../Components/DashBoard/DashboardStats";
 
 function AdminDashboard() {
    const sytem_id=localStorage.getItem('system_role_id')
@@ -52,23 +53,11 @@ function AdminDashboard() {
             )
           }
           
-
-        
-          
-
-
-
-
-
-
-
-
-
-          
+         
         </aside>
 
         <main className="content">
-         
+         <DashboardStats show={sytem_id === "1" ? "all" : "productsOnly"}/>
         </main>
       </div>
     </div>

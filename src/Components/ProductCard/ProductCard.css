@@ -5,14 +5,16 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  
   border: 1px solid #eef2f7;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
   margin: 10px;
 }
 
 .product-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 /* ================= TOP ================= */
@@ -29,9 +31,9 @@
   padding: 4px 10px;
   border-radius: 999px;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 900;
   text-transform: uppercase;
-  color: #1d4ed8;
+  color:var(--primary);
   box-shadow: 0 1px 3px rgba(0,0,0,0.08);
   z-index: 1;
 }
@@ -56,7 +58,7 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
 }
 
 .product-name {

@@ -43,7 +43,7 @@ function ProductDetails() {
   if (!product) return <h4 className="error-text">Product not found</h4>;
 
   return (
-    <div>
+    <div className="details-page">
       <Header />
 
       <div className="product-details-page">
