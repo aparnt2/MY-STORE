@@ -3,8 +3,12 @@
   margin: 0;
 }
 .back-icon{
-   font-size: 20px;
-   cursor: pointer;
+ border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  color:var(--primary);
+  font-weight: 600;
     
 }
 .tabs{
@@ -23,7 +27,7 @@
    
 }
 .main-content{
-    padding: 20px 80px;
+    padding: 0px 80px;
     position: relative;
     flex: 1;
     

@@ -4,6 +4,7 @@ import Header from "../../../Components/Header/Header";
 import Footer from "../../../Components/Footer/Footer";
 import { motion } from "framer-motion";
 import './ProductDetails.css';
+import { IoIosArrowBack } from "react-icons/io";
 
 function ProductDetails() {
   const { id } = useParams(); // Get product ID from URL
@@ -27,7 +28,7 @@ function ProductDetails() {
       }
     };
     fetchProduct();
-  }, [id, BASE_URL]);
+  }, [id]);
 
   // Loader
   if (loading) {
@@ -47,7 +48,8 @@ function ProductDetails() {
 
       <div className="product-details-page">
         <div className="back-row">
-          <button className="back-btn" onClick={() => navigate(-1)}>← Back</button>
+          
+          <IoIosArrowBack className='back-btn' onClick={() => navigate('/products')} />
         </div>
 
         <motion.div 

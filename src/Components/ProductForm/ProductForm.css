@@ -8,7 +8,7 @@
 
 /* Image upload card */
 .img-section {
-  width: 300px;
+  width: 400px;
   height: 400px;
   padding: 20px;
   border-radius: 16px;
@@ -94,8 +94,8 @@
   outline: none;
   font-size: 14px;
 }
-textarea{
-  height: 55px;
+.form-group textarea{
+  height: 90px;
 }
 
 .add-product-section select {

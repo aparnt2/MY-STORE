@@ -42,14 +42,22 @@ function ViewProduct() {
           }
           const res=await fetch(URL)
           const productdata=await res.json()
-          console.log(productdata);
-          setProducts(productdata)
+          if(!res.ok||!Array.isArray(productdata)){
+            setProducts([])
+            setError(productdata.detail||"No Product Found")
+          }else{
+             console.log(productdata);
+              setProducts(productdata)
+
+          }
+         
           setLoading(false)
           
 
         }catch{
-          setError("Error while Fetching Data")
-          setLoading(false)
+           setProducts([])
+            setError("Error while fetching data")
+            setLoading(false)
 
         }
       }
@@ -104,7 +112,7 @@ function ViewProduct() {
               
 
             </div>
-            <div className='productlist'>
+            <div className='product-list'>
                 {loading && (
             <div className="loader-wrapper">
               <span className="loader"></span>
@@ -112,6 +120,10 @@ function ViewProduct() {
           )}
                 {
                   error && <h4>{error}</h4>
+                }
+                {
+                  !loading && !error && products.length===0 &&(
+                  <h4>No product found</h4>)
                 }
                 {
                   products && (

@@ -92,8 +92,8 @@ function Products() {
       <Header />
 
       <div className='viewproduct-body'>
-        <div className='tab'>
-          <IoIosArrowBack className='back-icon' onClick={() => navigate('/home')} />
+        <div className='back-row'>
+          <IoIosArrowBack className='back-btn' onClick={() => navigate('/home')} />
         </div>
 
         <div className='search-sort'>

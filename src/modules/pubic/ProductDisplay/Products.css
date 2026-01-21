@@ -5,22 +5,22 @@
   min-height: 70vh;
 }
 
-.tab {
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.back-icon {
-  font-size: 28px;
+.back-btn {
+  border: none;
+  background: transparent;
+  font-size: 20px;
   cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  color: var(--primary);
+  font-weight: 600;
 }
 
-.back-icon:hover {
-  transform: translateX(-4px);
-  opacity: 0.7;
+.back-row {
+  margin-bottom: 24px;
 }
+
+
+
+
 
 .search-sort {
   display: flex;
@@ -36,8 +36,8 @@
 .productlist {
   display: flex;
   flex-direction: row;
- 
-  gap: 125px;
+ flex-wrap: wrap;
+  gap: 90px;
 }
 
 .productlist > div {

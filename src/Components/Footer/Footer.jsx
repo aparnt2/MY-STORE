@@ -12,8 +12,11 @@ function Footer() {
                 <p>MyStore is your go-to destination for quality products and exceptional service.</p>
 
             </div>
+          
             <div className='footer-col'>
                 <h4>About Us</h4>
+                 <Link to='/home'>Home</Link>
+
                 <Link to='/about'>About MYSTORE</Link>
                 
                 <Link to='/products'>View Products</Link>

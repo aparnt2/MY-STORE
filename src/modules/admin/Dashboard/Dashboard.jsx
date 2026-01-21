@@ -4,9 +4,12 @@ import Header from "../../../Components/Header/Header";
 import { FaPlus } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa"; 
 import './dashboard.css'
+import { useEffect } from "react";
 
 function AdminDashboard() {
    const sytem_id=localStorage.getItem('system_role_id')
+
+   
   return (
     <div className="admin-layout">
       <Header />

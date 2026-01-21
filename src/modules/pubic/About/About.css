@@ -37,7 +37,7 @@
 }
 
 /* Vision / Mission */
-.vison-mission {
+.vision-mission {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 32px;
@@ -45,7 +45,7 @@
 
 /* Cards */
 .mission,
-.vison {
+.vision {
   background: #f8fafc;
   padding: 32px;
   border-radius: 16px;

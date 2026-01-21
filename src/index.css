@@ -27,6 +27,8 @@ html, body, #root {
   --bg-card: #ffffff;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+  --delete-btn:#ef4444;
+  --delete-btn-hover:#dc2626;
 }
 .light {
   background-color: #ffffff;

@@ -11,6 +11,7 @@
 .add-btn{
     background-color: var(--primary);
     width:100px;
+    justify-content: center;
     height: 40px;
     border: none;
     border-radius: 8px;

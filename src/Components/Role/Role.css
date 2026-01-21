@@ -3,7 +3,8 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-   gap: 49px;
+   padding: 0 26PX;
+    gap: 72px;
   
     
     
@@ -72,7 +73,7 @@
 }
 .delete{
     height: 35px;
-    background-color: #FB7185;
+    background-color: var(--delete-btn);
     border: none;
     border-radius: 8px;
     color: white;
@@ -82,7 +83,7 @@
 
 }
 .delete:hover{
-  background-color: #b61e35;
+  background-color:var(--delete-btn-hover);
   
 
 }
