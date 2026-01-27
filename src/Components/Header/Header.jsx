@@ -2,9 +2,28 @@ import React from 'react'
 import { LuLogOut } from "react-icons/lu";
 import { FaShop } from "react-icons/fa6";
 import './Header.css'
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
-  const handilelogout=()=>{
+  const navigate=useNavigate()
+  const BASE_URL=import.meta.env.VITE_BASE_URL
+
+  const handilelogout=async()=>{
+    const token=localStorage.getItem('access_token')
+    console.log(token);
+    
+    const res=await fetch(`${BASE_URL}/logout`,{
+      method:'post',
+      headers:{
+        'Authorization':`Bearer ${token}`
+      }
+    })
+    const data=await res.json()
+    console.log(data.message);
+    localStorage.removeItem('access_token')
+    navigate("/")
+    
+
     
 
   }

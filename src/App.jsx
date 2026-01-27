@@ -1,56 +1,169 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import "./App.css"
-import Login from "./Login"
-import Sign_up from "./SignUp"
-import AdminDashboard from "./modules/admin/Dashboard/Dashboard"
-import MasterData from "./modules/admin/MasterData/MasterData"
-import Home from "./modules/pubic/Home/Home"
-import AddProduct from "./modules/admin/AddProduct/AddProduct"
-import ViewProduct from "./modules/admin/ViewProduct/ViewProduct"
-import EditProduct from "./modules/admin/EditProduct/EditProduct"
-import AddEmployee from "./modules/admin/AddEmployee/AddEmployee"
-import ViewEmployee from "./modules/admin/ViewEmployee/ViewEmployee"
-import EditEmployee from "./modules/admin/EditEmployee/EditEmployee"
-import About from "./modules/pubic/About/About"
-import Contact from "./modules/pubic/Contact/Contact"
-import Products from "./modules/pubic/ProductDisplay/Products"
-import ProductDetails from "./modules/pubic/ProductDisplay/ProductDetails"
-import ProtectedRoute from "./ProtectedRoute"
-import ScrollToTop from "./ScrollToTop"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
+import "./App.css";
+
+import ProtectedRoute from "./ProtectedRoute";
+import ScrollToTop from "./ScrollToTop";
+
+
+
+const Login = lazy(() => import("./Login"));
+const Sign_up = lazy(() => import("./SignUp"));
+
+
+
+/* Admin & User */
+const AdminDashboard = lazy(() => import("./modules/admin/Dashboard/Dashboard"));
+const MasterData = lazy(() => import("./modules/admin/MasterData/MasterData"));
+const AddProduct = lazy(() => import("./modules/admin/AddProduct/AddProduct"));
+const ViewProduct = lazy(() => import("./modules/admin/ViewProduct/ViewProduct"));
+const EditProduct = lazy(() => import("./modules/admin/EditProduct/EditProduct"));
+const AddEmployee = lazy(() => import("./modules/admin/AddEmployee/AddEmployee"));
+const ViewEmployee = lazy(() => import("./modules/admin/ViewEmployee/ViewEmployee"));
+const EditEmployee = lazy(() => import("./modules/admin/EditEmployee/EditEmployee"));
+
+/* Public */
+const Home = lazy(() => import("./modules/pubic/Home/Home"));
+const About = lazy(() => import("./modules/pubic/About/About"));
+const Contact = lazy(() => import("./modules/pubic/Contact/Contact"));
+const Products = lazy(() => import("./modules/pubic/ProductDisplay/Products"));
+const ProductDetails = lazy(() => import("./modules/pubic/ProductDisplay/ProductDetails"));
+
+
 
 function App() {
-  
-
   return (
-    
-     <BrowserRouter>
-     <ScrollToTop/>
-     <Routes>
-      <Route path="/" element={<Login/>}/>
-      <Route path="/sign_up" element={<Sign_up/>}/>
+    <BrowserRouter>
+      <ScrollToTop />
 
-     {/* admin & employee */}
-      <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['1','2']}><AdminDashboard /></ProtectedRoute>} />
-      <Route path="/admin/master-data" element={<ProtectedRoute allowedRoles={['1']}><MasterData /></ProtectedRoute>} />    {/* only admin */}  
-      <Route path="/add-product" element={<ProtectedRoute allowedRoles={['1','2']}><AddProduct/></ProtectedRoute>}/>
-      <Route path="/view-product" element={<ProtectedRoute allowedRoles={['1','2']}><ViewProduct/></ProtectedRoute>}/>
-      <Route path="/edit-product" element={<ProtectedRoute allowedRoles={['1','2']}><EditProduct/></ProtectedRoute>}/>
-      <Route path="/admin/view-employee" element={<ProtectedRoute allowedRoles={['1']}><ViewEmployee/></ProtectedRoute>}/>  {/* only admin */}
-      <Route path="/admin/add-employee" element={<ProtectedRoute allowedRoles={['1']}><AddEmployee/></ProtectedRoute>}/>    {/* only admin */}
-      <Route path='/admin/edit-employee' element={<ProtectedRoute allowedRoles={['1']}><EditEmployee/></ProtectedRoute>}/>  {/* only admin */}
+      <Suspense fallback={<div style={{ padding: 20 }}>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/sign_up" element={<Sign_up />} />
 
-      {/* public pages */}
-      <Route path="/home" element={<ProtectedRoute allowedRoles={['3','1','2']}><Home/></ProtectedRoute>}/>
-      <Route path='/products' element={<ProtectedRoute allowedRoles={['3','1','2']}><Products/></ProtectedRoute>}/>
-      <Route path="/product/:id" element={<ProtectedRoute allowedRoles={['3','1','2']}><ProductDetails/></ProtectedRoute>} />
-      <Route path='/about' element={<ProtectedRoute allowedRoles={['3','1','2']}><About/></ProtectedRoute>}/>
-      <Route path="/contact" element={<ProtectedRoute allowedRoles={['3','1','2']}><Contact/></ProtectedRoute>}/>
-    
-     </Routes>
-     
-     </BrowserRouter>
-    
-  )
+
+          {/* admin & employee */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute allowedRoles={[1, 2]}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/master-data"
+            element={
+              <ProtectedRoute allowedRoles={[1]}>
+                <MasterData />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/add-product"
+            element={
+              <ProtectedRoute allowedRoles={[1, 2]}>
+                <AddProduct />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/view-product"
+            element={
+              <ProtectedRoute allowedRoles={[1, 2]}>
+                <ViewProduct />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/edit-product"
+            element={
+              <ProtectedRoute allowedRoles={[1, 2]}>
+                <EditProduct />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/view-employee"
+            element={
+              <ProtectedRoute allowedRoles={[1]}>
+                <ViewEmployee />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/add-employee/"
+            element={
+              <ProtectedRoute allowedRoles={[1]}>
+                <AddEmployee />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/admin/edit-employee/:id"
+            element={
+              <ProtectedRoute allowedRoles={[1]}>
+                <EditEmployee />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* public pages */}
+          <Route
+            path="/home"
+            element={
+              <ProtectedRoute allowedRoles={[1, 2, 3]}>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/products"
+            element={
+              <ProtectedRoute allowedRoles={[1, 2, 3]}>
+                <Products />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/product/:id"
+            element={
+              <ProtectedRoute allowedRoles={[1, 2, 3]}>
+                <ProductDetails />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/about"
+            element={
+              <ProtectedRoute allowedRoles={[1, 2, 3]}>
+                <About />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/contact"
+            element={
+              <ProtectedRoute allowedRoles={[1, 2, 3]}>
+                <Contact />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

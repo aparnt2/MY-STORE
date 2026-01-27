@@ -43,9 +43,15 @@ header{
     background-color: white;
     padding: 5px 10px;
     border-radius: 8px;
+    cursor: pointer;
+}
+
+.logout-icon:hover{
+    background-color: #f0f0f0
 }
 .logout{
-    background-color: white;
+  
     font-size: 20px;
     color: var(--primary);
 }
+

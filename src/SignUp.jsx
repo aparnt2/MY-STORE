@@ -11,47 +11,60 @@ const[password,setPassword]=useState('')
 const [showPassword, setShowPassword] = useState(false);
 const [error, setError] = useState("");
 const [loading, setLoading] = useState(false);
+const [fieldErrors, setFieldErrors] = useState({});
+
 const BASE_URL=import.meta.env.VITE_BASE_URL
+const navigate = useNavigate();
 
+  const validate = () => {
+  const errors = {};
 
-  const navigate = useNavigate();
-
- const handleSignup = async () => {
-  if (!uname || !password) {
-    setError("Username and password required");
-    return;
+  if (!uname.trim()) {
+    errors.uname = "Username is required";
+  } else if (uname.length < 3) {
+    errors.uname = "Username must be at least 3 characters";
+  } else if (uname.includes(" ")) {
+    errors.uname = "Username cannot contain spaces";
   }
+
+  if (!password) {
+    errors.password = "Password is required";
+  } else if (password.length < 6) {
+    errors.password = "Password must be at least 6 characters";
+  } else if (!/[0-9]/.test(password)) {
+    errors.password = "Password must contain at least one number";
+  } else if (!/[a-zA-Z]/.test(password)) {
+    errors.password = "Password must contain at least one letter";
+  }
+
+  setFieldErrors(errors);
+  return Object.keys(errors).length === 0;
+};
+
+
+const handleSignup = async () => {
+  if (!validate()) return;
 
   setLoading(true);
   setError("");
 
   try {
-    const res = await fetch(`${BASE_URL}/user`, {
+    const res = await fetch(`${BASE_URL}/customer/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        username: uname,
+        username: uname.trim(),
         password: password,
       }),
     });
 
-    const signup = await res.json();
+    const data = await res.json();
 
     if (!res.ok) {
       throw new Error(data.detail || "Signup failed");
     }
 
-    const roleres=await fetch(`http://127.0.0.1:8000/user-role/`,
-            {
-                method:'post',
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({user_id:signup.user_id,sr_id:3})
-            }
-        )
-        const roleid=await roleres.json()
-        console.log(signup);
-        console.log(roleid);
-        navigate('/')
+    navigate("/");
 
   } catch (err) {
     setError(err.message);
@@ -60,14 +73,15 @@ const BASE_URL=import.meta.env.VITE_BASE_URL
   }
 };
 
+
   return (
     <div className="container">
       <div className="login-card">
         <h2 className="login-heading">Sign Up</h2>
 
         <div className="input-box">
-          {/* Email */}
-          <div className="email">
+          {/* username */}
+         <div className="field">
             <label>User Name</label>
             <input
               type="text"
@@ -75,10 +89,12 @@ const BASE_URL=import.meta.env.VITE_BASE_URL
               value={uname}
               onChange={(e) => setUname(e.target.value)}
             />
+            <p className="error-text">{fieldErrors.uname || " "}</p>
           </div>
 
+
           {/* Password */}
-          <div className="password">
+         <div className="field">
             <label>Password</label>
             <div className="password-container">
               <input
@@ -87,36 +103,25 @@ const BASE_URL=import.meta.env.VITE_BASE_URL
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <span
-                className="eye-icon"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <AiFillEye />:<AiFillEyeInvisible />  }
+              <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
               </span>
             </div>
+            <p className="error-text">{fieldErrors.password || " "}</p>
           </div>
+
 
         
           <button className="login-btn" onClick={handleSignup} disabled={loading}>
-            {loading ? "Signing Up...." : "Sign Up"}
+            {loading ? <div className="spinner"></div> : "Sign Up"}
+
           </button>
         </div>
 
-        {/* Error */}
-        {error && <p className="error-text">{error}</p>}
+        
 
-        {/* Divider */}
-       <p>or</p>
 
-        {/* Social login */}
-        <div className="social-login">
-          <button className="google-btn">
-            <FcGoogle /> Google
-          </button>
-          <button className="facebook-btn">
-            <FaFacebookF /> Facebook
-          </button>
-        </div>
+       
 
         <p className="signup-text">
           already have an account?<Link to='/'>Log in</Link>

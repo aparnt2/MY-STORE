@@ -3,7 +3,7 @@ import ProductCardPublic from '../../../Components/ProductCard/ProductCardPublic
 import { useNavigate, useLocation } from 'react-router-dom'
 import Header from '../../../Components/Header/Header'
 import Footer from '../../../Components/Footer/Footer'
-
+import Loader from '../../../Components/Loader/Loader'
 import { IoIosArrowBack } from "react-icons/io";
 import Search from '../../../Components/Search/Search'
 import Filter from '../../../Components/Filter/Filter'
@@ -48,50 +48,56 @@ function Products() {
   }, [location.state])
 
   // ================= FETCH PRODUCTS =================
-  useEffect(() => {
-    if (!categoryReady) return   
+useEffect(() => {
+  if (!categoryReady) return;
 
-    const fetchProducts = async () => {
-      try {
-        setLoading(true)
-        setError("")
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      setError("");
 
-        let URL = `${BASE_URL}/product/`
-
-        if (searchterm && searchterm.trim()) {
-          URL = `${BASE_URL}/product/search?keyword=${searchterm}`
-        } else if (selectedCate && selectedCate !== "") {
-          URL = `${BASE_URL}/product/category/${selectedCate}`
-        }
-
-        const res = await fetch(URL)
-        const productdata = await res.json()
-
-        //check the productdata is array
-        if (Array.isArray(productdata)) {
-          setProducts(productdata)
-        }else {
-          setProducts([])
-        }
-
-        setLoading(false)
-      } catch (error) {
-        console.log("Fetch error:", error)
-        setError("Error while fetching products")
-        setProducts([])
-        setLoading(false)
+      // Build query params
+      const params = new URLSearchParams();
+      if (searchterm && searchterm.trim()) {
+        params.append("keyword", searchterm.trim());
       }
-    }
+      if (selectedCate && selectedCate !== "") {
+        params.append("category", selectedCate);
+      }
 
-    fetchProducts()
-  }, [searchterm, selectedCate, categoryReady])
+      const queryString = params.toString();
+      const URL = queryString
+        ? `${BASE_URL}/product/product/?${queryString}`
+        : `${BASE_URL}/product/product/`;
+
+      const res = await fetch(URL);
+      const productdata = await res.json();
+
+      if (Array.isArray(productdata)) {
+        setProducts(productdata);
+      } else {
+        setProducts([]);
+      }
+
+      setLoading(false);
+    } catch (error) {
+      console.log("Fetch error:", error);
+      setError("Error while fetching products");
+      setProducts([]);
+      setLoading(false);
+    }
+  };
+
+  fetchProducts();
+}, [searchterm, selectedCate, categoryReady]);
+
 
   // ================= UI =================
   return (
     <div className='product-page' >
       <Header />
 
-      <div className='viewproduct-body'>
+      <div className='viewproductbody'>
         <div className='back-row'>
           <IoIosArrowBack className='back-btn' onClick={() => navigate('/home')} />
         </div>
@@ -111,11 +117,7 @@ function Products() {
         <div className='productlist'>
 
         
-          {loading && (
-            <div className="loader-wrapper">
-              <span className="loader"></span>
-            </div>
-          )}
+          {loading && <Loader  fullscreen/>}
 
          
           {!loading && error && <h4>{error}</h4>}

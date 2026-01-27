@@ -1,47 +1,74 @@
-.hero{
-    position: relative;
-    width:100% ;
-    height:400px ;
-    overflow:hidden ;
+.hero {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
 }
+
+/* ===============================
+   LOADER (only inside hero)
+================================ */
+.hero .loader-wrapper {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.6);
+  z-index: 5; /* highest */
+}
+
+/* ===============================
+   OVERLAY
+================================ */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
   background: rgba(255, 255, 255, 0.4);
+  z-index: 1;
 }
-.hero-img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background-color: rgba(0, 0, 0, 0.35); /* dullness */
-}
-.hero-content{
-    position: absolute;
-    color:black ;
-    max-width: 400px;
-    top: 25%;
-    left: 35%;
-    text-align: center;
-    
 
+/* ===============================
+   IMAGE
+================================ */
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: rgba(0, 0, 0, 0.35); /* dullness */
+  position: relative;
+  z-index: 0;
 }
-.hero-content h2{
-    line-height: 2rem;
-    margin-bottom: 20px;
-    font-weight: bold;
-    font-size: 1.8rem;
 
+/* ===============================
+   CONTENT
+================================ */
+.hero-content {
+  position: absolute;
+  z-index: 2;
+  color: black;
+  max-width: 400px;
+  top: 25%;
+  left: 35%;
+  text-align: center;
 }
-.hero-content button{
-    background-color: var(--primary);
-    border-radius: 8px;
-    color: white;
-    font-size: .8rem;
-    font-weight: bold;
-    padding: 10px 16px;
-    border: none;
+
+.hero-content h2 {
+  line-height: 2rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  font-size: 1.8rem;
 }
-.hero-content button:hover{
-    background-color: var(--primary-hover);
+
+.hero-content button {
+  background-color: var(--primary);
+  border-radius: 8px;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 10px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.hero-content button:hover {
+  background-color: var(--primary-hover);
 }

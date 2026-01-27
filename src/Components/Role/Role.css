@@ -1,90 +1,79 @@
-.role-container{
-    margin-top: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-   padding: 0 26PX;
-    gap: 72px;
+.table-wrapper {
+  margin-top: 30px;
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 500px;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #e0e0e0;
+  padding: 15px 15px;
+  text-align: left;
+  font-size: 14px;
+}
+
+.data-table th {
+  background: #f8fafc;
+  font-weight: 700;
+}
+
+.data-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+.edit-btn,
+.delete-btn {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-btn {
+  background-color: var(--primary);
+}
+
+.edit-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.delete-btn {
+  background-color: var(--delete-btn);
+}
+
+.delete-btn:hover {
+  background-color: var(--delete-btn-hover);
+}
+/* Make the last column (Actions) fixed width */
+.data-table th:last-child,
+.data-table td:last-child {
+  width: 150px;
+  max-width: 150px;
+  white-space: nowrap; /* prevent wrapping */
+  text-align: center;
+  padding: 5px;        /* reduce padding */
   
-    
-    
-  
 }
 
-.card{
-    background-color: white;
-    width: 230px;
-    padding: 20px;
-    border-radius: 16px;
-     box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-
+/* Buttons inside Action column should scale down */
+.edit-btn,
+.delete-btn {
+    /* smaller padding */
+  font-size: 14px;     /* smaller font if needed */
+  width: auto;         /* remove any fixed width */
+  margin: 0;           /* remove extra margin */
+ 
 }
-.code{
-    background-color: var(--primary);
-    padding: 20px;
-    border-radius: 16px;
-    font-weight: 600;
-    color: white;
+.edit-btn {
+  margin-right: 10px; /* tiny gap to separate from delete */
 }
-.card-btn{
-     display: flex;
-    flex-direction:row;
-    gap: 16px;
-    
-}
-.Name{
-    font-weight: 600;
-    text-align: center;
-}
-.card-btn{
-     display: flex;
-    flex-direction:row;
-    gap: 16px;
-    
-}
-
-
-
-.edit{
-    height: 35px;
-    width: 100px;
-    background-color: #5095FF;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-
-
-
-}
-.edit:hover{
-  background-color: #1c60c5;
-
-
-}
-.delete{
-    height: 35px;
-    background-color: var(--delete-btn);
-    border: none;
-    border-radius: 8px;
-    color: white;
-    width: 50px;
-
-
-
-}
-.delete:hover{
-  background-color:var(--delete-btn-hover);
-  
-
-}
-

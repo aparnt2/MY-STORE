@@ -1,102 +1,117 @@
-.category-container{
-    margin-top: 40px;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-     padding: 0 26PX;
-    gap: 72px;
-  
-    
-    
-  
+/* Table wrapper */
+.table-wrapper {
+  margin-top: 30px;
+  overflow-x: auto;
 }
 
-.card{
-    background-color: white;
-    width: 230px;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-
-}
-.code{
-    background-color: var(--primary);
-    padding: 20px;
-    border-radius: 16px;
-    font-weight: 600;
-    color: white;
-}
-.card-btn{
-     display: flex;
-    flex-direction:row;
-    gap: 16px;
-    
-}
-.image-wrapper{
-    width: 200px;
-    height: 200px;
-    border-radius: 8px;
-    overflow: hidden;
-}
-.image-wrapper img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-.Name{
-    font-weight: 600;
-    text-align: center;
-}
-.card-btn{
-     display: flex;
-    flex-direction:row;
-    gap: 16px;
-    
+/* Table layout */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
-
-
-.edit{
-    height: 35px;
-    width: 100px;
-    background-color: #5095FF;
-    border: none;
-    color: white;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-
-
-
-}
-.edit:hover{
-  background-color: #1c60c5;
-
-
-}
-.delete{
-    height: 35px;
-    background-color:var(--delete-btn);
-    border: none;
-    border-radius: 8px;
-    color: white;
-    width: 50px;
-
-
-
-}
-.delete:hover{
-  background-color:var(--delete-btn-hover);
-  
-
+/* Table headers and cells */
+.data-table th,
+.data-table td {
+  border: 1px solid #e0e0e0;
+  padding: 8px 10px;
+  text-align: left;
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
+.data-table th {
+  background: #f8fafc;
+  font-weight: 700;
+}
+
+/* Hover */
+.data-table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+/* ========================= */
+/* Column widths */
+/* ========================= */
+
+/* ID column */
+.data-table th:first-child,
+.data-table td:first-child {
+  width: 80px;
+  max-width: 80px;
+  text-align: center;
+}
+
+/* Image column */
+.data-table th:nth-child(2),
+.data-table td:nth-child(2) {
+  width: 220px;
+  max-width: 220px;
+  text-align: center;
+}
+
+/* Actions column */
+.data-table th:last-child,
+.data-table td:last-child {
+  width: 140px;
+  max-width: 140px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ========================= */
+/* Image styling */
+/* ========================= */
+
+.image-wrapper {
+  width: 200px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 0 auto;
+  background: #f1f5f9;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ========================= */
+/* Buttons */
+/* ========================= */
+
+.edit-btn,
+.delete-btn {
+  padding: 6px 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.edit-btn {
+  background-color: var(--primary);
+  margin-right: 10px;
+}
+
+.edit-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+.delete-btn {
+  background-color: var(--delete-btn);
+}
+
+.delete-btn:hover {
+  background-color: var(--delete-btn-hover);
+}

@@ -1,0 +1,10 @@
+.edit-employee{
+    padding: 20px 80px;
+}
+.edit-heading{
+    display: flex;
+    gap: 20px;
+}
+.back-row{
+    color: var(--primary);
+}

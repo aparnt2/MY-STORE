@@ -69,14 +69,7 @@ function ProductDetails() {
           </div>
 
           <div className="info-section">
-            <motion.span
-              className="category-pill"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-            >
-              {product.category?.category_name}
-            </motion.span>
+           
 
             <motion.h1
               className="product-title"
@@ -95,6 +88,15 @@ function ProductDetails() {
             >
               <span className="ammount">₹ </span>{product.price.toLocaleString()}
             </motion.div>
+
+             <motion.span
+              className="category-pill"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
+            >
+              {product.category?.category_name}
+            </motion.span>
 
             {product.description && (
               <motion.p

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Header from '../../../Components/Header/Header'
 import ProductForm from '../../../Components/ProductForm/ProductForm'
 import { IoIosArrowBack } from "react-icons/io"
+import './EditProduct.css'
 
 function EditProduct() {
   const navigate = useNavigate()
@@ -75,7 +76,7 @@ function EditProduct() {
       if (!res.ok) throw new Error("Failed to update product")
 
       alert("Product updated successfully")
-      navigate('/admin/view-product')
+      navigate('/view-product')
     } catch (err) {
       console.error(err)
       alert("Error updating product")
@@ -87,12 +88,16 @@ function EditProduct() {
       <Header />
 
       <div className='heading'>
-        <IoIosArrowBack
+        
+          <IoIosArrowBack
           className='back-icon'
           onClick={() => navigate('/view-product')}
         />
         <h3>Edit Product</h3>
-      </div>
+
+        </div>
+        
+      
 
       <ProductForm
         categories={category} 
@@ -107,6 +112,7 @@ function EditProduct() {
         submitText="Update"
         onSubmit={handleEditProduct}
       />
+     
     </>
   )
 }

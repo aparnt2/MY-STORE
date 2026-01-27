@@ -53,6 +53,7 @@ function AddProduct() {
   })
 
   alert("Product added successfully")
+  navigate('/view-product')
   return true   
 }
 

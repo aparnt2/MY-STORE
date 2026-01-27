@@ -19,6 +19,7 @@ function ProductForm({
   const [selectedCate, setSelectedCate] = useState("")
   const [imgPreview, setImgPreview] = useState(null)
   const [imageFile, setImageFile] = useState(null)
+ 
 
   // validation errors
   const [errors, setErrors] = useState({})
@@ -42,30 +43,46 @@ function ProductForm({
     setImageFile(file)
   }
 
-  // validate form before submit
-const validate = () => {
-  const newErrors = {}
+ const validate = () => {
+  const e = {}
 
-  if (!formData.product_name.trim()) newErrors.product_name = "Product Name is required"
+  if (!formData.product_name.trim()) {
+    e.product_name = "Product name is required"
+  } else if (formData.product_name.length < 3) {
+    e.product_name = "Product name must be at least 3 characters"
+  }
 
   if (!formData.price.trim()) {
-    newErrors.price = "Price is required"
-  } else if (isNaN(formData.price)) {
-    newErrors.price = "Price must be a number"
+    e.price = "Price is required"
+  } else if (isNaN(formData.price) || Number(formData.price) <= 0) {
+    e.price = "Price must be a positive number"
   }
 
   if (!formData.stock.trim()) {
-    newErrors.stock = "Stock is required"
-  } else if (isNaN(formData.stock)) {
-    newErrors.stock = "Stock must be a number"
+    e.stock = "Stock is required"
+  } else if (isNaN(formData.stock) || Number(formData.stock) < 0) {
+    e.stock = "Stock must be 0 or more"
   }
 
-  if (!selectedCate) newErrors.category = "Category is required"
-  if (!formData.description.trim()) newErrors.description = "Description is required"
+  if (!selectedCate) {
+    e.category = "Category is required"
+  }
 
-  setErrors(newErrors)
-  return Object.keys(newErrors).length === 0
+  if (!formData.description.trim()) {
+    e.description = "Description is required"
+  } else if (formData.description.length < 10) {
+    e.description = "Description must be at least 10 characters"
+  }
+
+ if (!imageFile && !imgPreview) {
+  e.image = "Product image is required"
 }
+
+
+  setErrors(e)
+  return Object.keys(e).length === 0
+}
+
 
 
  const handleSubmit = async () => {
@@ -93,11 +110,12 @@ const validate = () => {
 }
 
   return (
-    <div className='content'>
+    <div className='product-container'>
       <div className='body'>
         {/* Image Section */}
         <div className='img-section'>
           <h4>Select Product Image</h4>
+           <p className="error-text">{errors.image || " "}</p>
           <label className='upload-box'>
             {imgPreview ? (
               <img src={imgPreview} alt="preview" className='preview-img' />
@@ -110,71 +128,96 @@ const validate = () => {
             )}
             <input type='file' hidden onChange={handleImage} />
           </label>
+         
+
+
+
         </div>
 
+       
         {/* Form Section */}
-        <div className='add-product-section'>
-          {/* Product Name */}
-          <div className='form-group'>
-            {errors.product_name && <div className='error-message'>{errors.product_name}</div>}
-            <label>Product Name</label>
-            <input
-            
-              value={formData.product_name}
-              onChange={e => setFormData({ ...formData, product_name: e.target.value })}
-            />
-          </div>
+<div className='add-product-section'>
 
-          {/* Price & Stock */}
-          <div className='price-stock'>
-            <div className='form-group'>
-              {errors.price && <div className='error-message'>{errors.price}</div>}
-              <label>Price</label>
-              <input
-              
-                value={formData.price}
-                onChange={e => setFormData({ ...formData, price: e.target.value })}
-              />
-            </div>
+  {/* Product Name */}
+  <div className='form-group'>
+    <label>Product Name</label>
+    <p className="error-text">{errors.product_name || " "}</p>
+    <input
+      value={formData.product_name}
+      onChange={e => {
+        setFormData({ ...formData, product_name: e.target.value })
+        setErrors(prev => ({ ...prev, product_name: "" }))
+      }}
+    />
+    
+  </div>
 
-            <div className='form-group'>
-              {errors.stock && <div className='error-message'>{errors.stock}</div>}
-              <label>Stock</label>
-              <input
-              type='number'
-                value={formData.stock}
-                onChange={e => setFormData({ ...formData, stock: e.target.value })}
-              />
-            </div>
-          </div>
+  {/* Price */}
+  <div className='form-group'>
+    <label>Price</label>
+      <p className="error-text">{errors.price || " "}</p>
+    <input
+      value={formData.price}
+      onChange={e => {
+        setFormData({ ...formData, price: e.target.value })
+        setErrors(prev => ({ ...prev, price: "" }))
+      }}
+    />
+  
+  </div>
 
-          {/* Category */}
-          <div className='form-group'>
-            {errors.category && <div className='error-message'>{errors.category}</div>}
-            <label>Category</label>
-            <select
-              value={selectedCate}
-              onChange={e => setSelectedCate(e.target.value)}
-            >
-              <option value="">Select Category</option>
-              {categories.map(c => (
-                <option key={c.category_id} value={c.category_id}>
-                  {c.category_name}
-                </option>
-              ))}
-            </select>
-          </div>
+  {/* Stock */}
+  <div className='form-group'>
+    <label>Stock</label>
+    <p className="error-text">{errors.stock || " "}</p>
+    <input
+      type="number"
+      value={formData.stock}
+      onChange={e => {
+        setFormData({ ...formData, stock: e.target.value })
+        setErrors(prev => ({ ...prev, stock: "" }))
+      }}
+    />
+    
+  </div>
 
-          {/* Description */}
-          <div className='form-group'>
-            {errors.description && <div className='error-message'>{errors.description}</div>}
-            <label>Description</label>
-            <textarea
-              value={formData.description}
-              onChange={e => setFormData({ ...formData, description: e.target.value })}
-            />
-          </div>
-        </div>
+  {/* Category */}
+  <div className='form-group'>
+    <label>Category</label>
+     <p className="error-text">{errors.category || " "}</p>
+    <select
+      value={selectedCate}
+      onChange={e => {
+        setSelectedCate(e.target.value)
+        setErrors(prev => ({ ...prev, category: "" }))
+      }}
+    >
+      <option value="">Select Category</option>
+      {categories.map(c => (
+        <option key={c.category_id} value={c.category_id}>
+          {c.category_name}
+        </option>
+      ))}
+    </select>
+   
+  </div>
+
+  {/* Description */}
+  <div className='form-group'>
+    <label>Description</label>
+    <p className="error-text">{errors.description || " "}</p>
+    <textarea
+      value={formData.description}
+      onChange={e => {
+        setFormData({ ...formData, description: e.target.value })
+        setErrors(prev => ({ ...prev, description: "" }))
+      }}
+    />
+    
+  </div>
+
+</div>
+
       </div>
 
       {/* Submit Button */}

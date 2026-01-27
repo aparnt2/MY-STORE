@@ -1,30 +1,40 @@
-import React from 'react'
-import './Department.css'
+import React from 'react';
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
+import './Department.css';
 
-
-function Department({dep,onEdit,onDelete}) {
+function Department({ dep, onEdit, onDelete }) {
   return (
-    <div className='dept-container'>
-        {
-            dep.map(d=>(
-                <div className='card' key={d.id}>
-                    <div className='code'>{d.code}</div>
-                    <div  className='Name'>{d.name}</div>
-                    <div className='card-btn'> 
-                    <button className='edit' onClick={()=>onEdit(d)}><FaEdit size={20}/></button>
-                    <button className='delete' onClick={()=>onDelete(d.id)} ><MdDelete size={20} /></button>
-                    </div>
-
-                </div>
-            ))
-
-        }
-
-      
+    <div className="table-wrapper">
+      <table className="data-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {dep.map(d => (
+            <tr key={d.id}>
+              <td>{d.id}</td>
+              <td>{d.code}</td>
+              <td>{d.name}</td>
+              <td>
+                <button className="edit-btn" onClick={() => onEdit(d)}>
+                  <FaEdit />
+                </button>
+                <button className="delete-btn" onClick={() => onDelete(d.id)}>
+                  <MdDelete />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-  )
+  );
 }
 
-export default Department
+export default Department;

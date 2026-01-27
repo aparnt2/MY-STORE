@@ -13,14 +13,29 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const BASE_URL=import.meta.env.VITE_BASE_URL
+  const [fieldErrors, setFieldErrors] = useState({});
+  
 
   const navigate = useNavigate();
+  const validate = () => {
+  const errors = {}
+
+  if (!uname.trim()) {
+    errors.uname = "Username is required"
+  }
+
+  if (!password) {
+    errors.password = "Password is required"
+  }
+
+  setFieldErrors(errors)
+  return Object.keys(errors).length === 0
+}
+
 
   const handleLogin = async () => {
-  if (!uname || !password) {
-    setError("Username and Password are required");
-    return;
-  }
+  if (!validate()) return;
+
 
   setLoading(true);
   setError("");
@@ -43,14 +58,22 @@ function Login() {
       throw new Error(data.detail || "Login failed");
     }
 
-    localStorage.setItem("access_token", data.access_token);
-    localStorage.setItem("system_role_id", data.system_role_id);
+    localStorage.setItem("system_role_id", data.sr_id);
 
-    const role = data.system_role_id;
+      const role = Number(data.sr_id);
+
+      console.log("LOGIN RESPONSE:", data);
+      console.log("ROLE:", role, typeof role);
+      localStorage.setItem("access_token", data.access_token);
+   
+  
+    
+
 
     switch (role) {
       case 1:
         navigate("/dashboard");
+        break;
       case 2:
         navigate("/dashboard");
         break;
@@ -60,10 +83,15 @@ function Login() {
       default:
         navigate("/");
     }
+    
+
+
 
   } catch (err) {
     setError(err.message);
   } finally {
+    setFieldErrors({})
+    setError("")
     setLoading(false);
   }
 };
@@ -74,36 +102,42 @@ function Login() {
       <div className="login-card">
         <h2 className="login-heading">Login</h2>
 
-        <div className="input-box">
-          {/* Email */}
-          <div className="email">
+         <div className="input-box">
+          {/* username */}
+         <div className="field">
             <label>User Name</label>
             <input
-              type="text"
-              placeholder="Your email"
-              value={uname}
-              onChange={(e) => setUname(e.target.value)}
-            />
+            placeholder="user name"
+                value={uname}
+                onChange={(e) => {
+                  setUname(e.target.value)
+                  setFieldErrors(prev => ({ ...prev, uname: "" }))
+                }}
+              />
+
+            <p className="error-text">{fieldErrors.uname || " "}</p>
           </div>
 
           {/* Password */}
-          <div className="password">
-            <label>Password</label>
-            <div className="password-container">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Your password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <span
-                className="eye-icon"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? <AiFillEye />:<AiFillEyeInvisible />  }
-              </span>
-            </div>
-          </div>
+         <div className="field">
+                     <label>Password</label>
+                     <div className="password-container">
+                       <input
+                       placeholder="password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => {
+                              setPassword(e.target.value)
+                              setFieldErrors(prev => ({ ...prev, password: "" }))
+                            }}
+                          />
+
+                       <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+                         {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+                       </span>
+                     </div>
+                     <p className="error-text">{fieldErrors.password || " "}</p>
+                   </div>
 
           {/* Login button */}
           <button className="login-btn" onClick={handleLogin} disabled={loading}>
@@ -111,22 +145,9 @@ function Login() {
           </button>
         </div>
 
-        {/* Error */}
-        {error && <p className="error-text">{error}</p>}
+        
 
-        {/* Divider */}
-       <p>or</p>
-
-        {/* Social login */}
-        <div className="social-login">
-          <button className="google-btn">
-            <FcGoogle /> Google
-          </button>
-          <button className="facebook-btn">
-            <FaFacebookF /> Facebook
-          </button>
-        </div>
-
+        
         <p className="signup-text">
           Don’t have an account? <Link to="sign_up">Sign up</Link>
         </p>

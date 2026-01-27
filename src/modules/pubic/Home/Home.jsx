@@ -11,7 +11,7 @@ function Home() {
  
 
   return (
-    <div className='main' style={{backgroundColor:"#f8fafc"}}>
+    <div className='main' >
       <Header/>
       <Hero/>
       <ProductByCategory/>
