@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../../../Components/Header/Header'
+import Header from '../../../Components/Header/AdminHeader'
 import { data, Navigate, useNavigate } from 'react-router-dom'
 import { FaEdit } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io"
 import { MdDelete } from "react-icons/md";
 import './ViewEmployee.css'
+import Swal from "sweetalert2";
+
 
 function ViewEmployee() {
     const navigate=useNavigate()
@@ -47,29 +49,52 @@ function ViewEmployee() {
 
     },[])
 
-    const handiledelete=async (id)=>{
-      const confirmdelete=window.confirm('do you want to remove this employee')
-      if(!confirmdelete) return;
-       const token=localStorage.getItem('access_token')
-      try{
-        const res=await fetch(`${BASE_URL}/employee/${id}/delete`,{
-          method:'post',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
-        if(!res.ok){
-          throw new Error("failed to delete")
-        }
-         setEmployees(prev=>prev.filter(emp=>emp.emp_id!=id))
+   const handleDelete = async (id) => {
+  const result = await Swal.fire({
+    title: "Are you sure?",
+    text: "This employee will be permanently deleted!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#dc2626",
+    cancelButtonColor: "#6b7280",
+    confirmButtonText: "Yes, delete!",
+  });
 
-      }catch(err){
-        console.log(err);
-        
+  if (!result.isConfirmed) return;
 
-      }
+  const token = localStorage.getItem("access_token");
 
-    }
+  try {
+    const res = await fetch(`${BASE_URL}/employee/${id}/delete`, {
+      method: "post",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) throw new Error("Delete failed");
+
+    setEmployees(prev => prev.filter(emp => emp.emp_id !== id));
+
+    
+    Swal.fire({
+      icon: "success",
+      title: "Deleted!",
+      text: "Employee removed successfully.",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+
+  } catch (err) {
+    
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Failed to delete employee.",
+    });
+  }
+};
+
   return (
     <div>
         <Header/>
@@ -86,7 +111,7 @@ function ViewEmployee() {
         <table className='employee-table'>
           <thead>
             <tr>
-              <th>ID</th>
+              
               <th>Name</th>
               <th>Username</th>
               <th>Phone</th>
@@ -99,7 +124,7 @@ function ViewEmployee() {
           <tbody>
             {employees.map((e)=>(
               <tr key={e.emp_id}>
-                <td>{e.emp_id}</td>
+                
                 <td>{e.name}</td>
                  <td>{e.user.username}</td>
                 <td>{e.phone_no}</td>
@@ -110,7 +135,8 @@ function ViewEmployee() {
                   <button className="edit-btn" onClick={()=>navigate(`/admin/edit-employee/${e.emp_id}`)}>
                     <FaEdit size={16} />
                   </button>
-                  <button className="delete-btn" onClick={()=>handiledelete(e.emp_id)}>
+                 <button className="delete-btn" onClick={() => handleDelete(e.emp_id)}>
+
                     <MdDelete size={16}/>
 
                   </button>

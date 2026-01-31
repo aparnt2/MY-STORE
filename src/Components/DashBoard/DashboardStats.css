@@ -1,45 +1,54 @@
-/* Container for all counters */
+/* Container layout */
 .dashboard-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  margin: 20px 0;
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
 }
 
-/* Individual stat cards */
+/* Base Card Styling */
 .stat-card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: default;
+    flex: 1;
+    min-width: 200px;
+    padding: 25px;
+    border-radius: 12px;
+    color: rgb(9, 9, 53);
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 500;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Hover effect for card */
 .stat-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Number inside the card */
-.stat-card::before {
-  content: attr(data-count);
-  font-size: 28px;
-  font-weight: 700;
-  color: #1d4ed8; /* Primary color */
-  margin-bottom: 8px;
+.stat-card h2 {
+    margin: 10px 0 0;
+    font-size: 2.5rem;
+    font-weight: 700;
 }
 
-/* Card label */
-.stat-card {
-  font-size: 16px;
-  font-weight: 600;
-  color: #0f172a;
-  text-align: center;
+/* Individual Colors - Matched to your theme */
+
+/* Products: A bright blue to match your sidebar buttons */
+.stat-card.products {
+    background: linear-gradient(135deg, #b7d7f3 0%, #acf6fc 100%);
+}
+
+/* Departments: A soft purple/indigo to bridge the dark header and blue sidebar */
+.stat-card.departments {
+    background: linear-gradient(135deg, #94a4eb 0%, #8d6fac 100%);
+}
+
+/* Roles: A warm orange/amber for variety and visibility */
+.stat-card.roles {
+    background: linear-gradient(135deg, #f3da89 0%, #fab29e 100%);
+}
+
+/* Categories: A fresh teal/green */
+.stat-card.categories {
+    background: linear-gradient(135deg, #63aaa4 0%, #8df1b4 100%);
 }

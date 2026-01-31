@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../../../Components/Header/Header'
+import Header from '../../../Components/Header/AdminHeader'
 import EmployeeModel from '../../../Components/EmployeeModel/EmployeeModel'
 import './AddEmployee.css'
 import { IoIosArrowBack } from "react-icons/io"
 import { useNavigate } from 'react-router-dom'
+import Swal from "sweetalert2";
+
 
 
 
@@ -29,7 +31,7 @@ function AddEmployee() {
     
     },[])
 
-   const handileAddEmployee = async (payload) => {
+const handleAddEmployee = async (payload) => {
   const access_token = localStorage.getItem("access_token");
 
   try {
@@ -45,19 +47,43 @@ function AddEmployee() {
     const data = await res.json();
 
     if (res.ok) {
-      alert("Employee added successfully");
+     
+      await Swal.fire({
+        icon: "success",
+        title: "Employee Added",
+        text: "Employee has been added successfully.",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+
       navigate("/admin/view-employee");
-      return true;   
+      return true;
+
     } else {
-      alert(data.message || "Failed to add employee");
-      return false;  
+      
+      await Swal.fire({
+        icon: "error",
+        title: "Failed",
+        text: data.message || "Failed to add employee",
+      });
+
+      return false;
     }
+
   } catch (err) {
     console.error(err);
-    alert("Something went wrong");
-    return false;    
+
+    
+    await Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Something went wrong while adding employee.",
+    });
+
+    return false;
   }
 };
+
 
 
     return(
@@ -79,7 +105,7 @@ function AddEmployee() {
                     role={role}
                     department={department}
                     isEdit={false}
-                    onSubmit={handileAddEmployee}
+                    onSubmit={handleAddEmployee}
                     />
                                     
                     

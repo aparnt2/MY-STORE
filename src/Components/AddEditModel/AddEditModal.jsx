@@ -17,8 +17,7 @@ function AddEditModal({
   setRcode,
   cname,
   setCname,
-  ccode,
-  setCcode,
+ 
   imageFile,
   setImageFile,
   onClose,
@@ -45,19 +44,21 @@ function AddEditModal({
         <h3>
           {activetab === 'department' && (editdept ? 'Edit Department' : 'Add Department')}
           {activetab === 'role' && (editRole ? 'Edit Role' : 'Add Role')}
-          {activetab === 'category' && 'Add Category'}
+          {activetab === 'category' &&(editCategory ? 'Edit Category' : 'Add Category')}
         </h3>
 
         <div className='model-form'>
           {/* Department Inputs */}
           {activetab === 'department' && (
             <>
+             <label>Department Name</label>
               <input
                 type="text"
                 placeholder="Enter department name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
+               <label>Department Code</label>
               <input
                 type="text"
                 placeholder="Enter department code"
@@ -70,12 +71,14 @@ function AddEditModal({
           {/* Role Inputs */}
           {activetab === 'role' && (
             <>
+            <label>Role Name</label>
               <input
                 type="text"
                 placeholder="Enter role name"
                 value={rname}
                 onChange={(e) => setRname(e.target.value)}
               />
+              <label>Role Code</label>
               <input
                 type="text"
                 placeholder="Enter role code"
@@ -88,19 +91,14 @@ function AddEditModal({
           {/* Category Inputs */}
           {activetab === 'category' && (
             <>
+            <label>Category Name</label>
               <input
                 type="text"
                 placeholder="Enter category name"
                 value={cname}
                 onChange={(e) => setCname(e.target.value)}
               />
-              <input
-                type="text"
-                placeholder="Enter category code"
-                value={ccode}
-                onChange={(e) => setCcode(e.target.value)}
-              />
-
+            
               <div className="image-upload-container">
                 <label className="upload-box">
                   {preview ? (

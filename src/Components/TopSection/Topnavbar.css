@@ -1,0 +1,48 @@
+.header-section-link {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
+  padding: 8px ;
+
+  
+  
+ 
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  
+
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Links */
+.header-section-link a {
+  text-decoration: none;
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #222;
+
+  padding: 4px 8px;
+  border-radius: 50px;
+ 
+
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+/* Hover */
+.header-section-link a:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Active page */
+.header-section-link a.active {
+  background: var(--primary);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}

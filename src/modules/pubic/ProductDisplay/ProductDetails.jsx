@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import Header from "../../../Components/Header/Header";
+import PubilcHeader from '../../../Components/Header/PublicHeader'
 import Footer from "../../../Components/Footer/Footer";
 import { motion } from "framer-motion";
 import './ProductDetails.css';
@@ -44,7 +44,7 @@ function ProductDetails() {
 
   return (
     <div className="details-page">
-      <Header />
+      <PubilcHeader/>
 
       <div className="product-details-page">
         <div className="back-row">
@@ -115,8 +115,8 @@ function ProductDetails() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45, duration: 0.5 }}
             >
-              <button className="add-cart-btn">Add to Cart</button>
-              <button className="buy-now-btn">Buy Now</button>
+              {/* <button className="add-cart-btn">Add to Cart</button>
+              <button className="buy-now-btn">Buy Now</button> */}
             </motion.div>
           </div>
         </motion.div>

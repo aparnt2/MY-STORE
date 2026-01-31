@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../../Components/Header/Header';
+import Header from '../../../Components/Header/AdminHeader';
 import { useNavigate } from 'react-router-dom';
 import { IoIosArrowBack } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
@@ -10,6 +10,9 @@ import Search from '../../../Components/Search/Search';
 import Loader from '../../../Components/Loader/Loader';
 
 import './ViewProduct.css';
+
+import Swal from "sweetalert2";
+
 
 function ViewProduct() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -82,18 +85,55 @@ useEffect(() => {
 
 
   // ===== Delete Product =====
-  const handleDelete = async (id) => {
-    const confirmDelete = window.confirm("Do you want to delete this product?");
-    if (!confirmDelete) return;
+const handleDelete = async (id) => {
+  const result = await Swal.fire({
+    title: "Delete Product?",
+    text: "This action cannot be undone.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, delete",
+    confirmButtonColor: "#ef4444",
+    cancelButtonText: "Cancel",
+  });
 
-    try {
-      const res = await fetch(`${BASE_URL}/product/${id}/delete`);
-      if (!res.ok) throw new Error("Failed to delete");
-      setProducts(prev => prev.filter(p => p.product_id !== id));
-    } catch (err) {
-      alert("Error while deleting product");
-    }
-  };
+  if (!result.isConfirmed) return;
+
+  try {
+   
+    Swal.fire({
+      title: "Deleting...",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
+
+    const res = await fetch(`${BASE_URL}/product/${id}/delete`);
+
+    if (!res.ok) throw new Error("Delete failed");
+
+    
+    setProducts((prev) => prev.filter((p) => p.product_id !== id));
+
+   
+    await Swal.fire({
+      icon: "success",
+      title: "Deleted",
+      text: "Product deleted successfully.",
+      timer: 1200,
+      showConfirmButton: false,
+    });
+
+  } catch (err) {
+    console.error(err);
+
+    await Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Failed to delete product.",
+    });
+  }
+};
 
   return (
     <div>
@@ -118,7 +158,7 @@ useEffect(() => {
             <table className="product-table">
               <thead>
                 <tr>
-                  <th>ID</th>
+                 
                   <th>Image</th>
                   <th>Name</th>
                   <th>Category</th>
@@ -129,7 +169,7 @@ useEffect(() => {
               <tbody>
                 {products.map(p => (
                   <tr key={p.product_id}>
-                    <td>{p.product_id}</td>
+                   
                     <td>
                       <img src={p.image_url} alt={p.product_name} className="thumbnail" />
                     </td>
@@ -139,7 +179,8 @@ useEffect(() => {
                     <td>
                       <button 
                         className="edit-btn"
-                        onClick={() => navigate('/edit-product', { state: { product: p } })}
+                        onClick={() => navigate(`/edit-product/${p.product_id}`)}
+
                       >
                         <FaEdit size={16} />
                       </button>

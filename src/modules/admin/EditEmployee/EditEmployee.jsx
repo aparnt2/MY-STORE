@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../../../Components/Header/Header';
+import Header from '../../../Components/Header/AdminHeader';
 import EmployeeModel from '../../../Components/EmployeeModel/EmployeeModel';
 import { useNavigate, useParams } from 'react-router-dom';
+import { IoIosArrowBack } from "react-icons/io"
 import './EditEmployee.css';
+import Swal from "sweetalert2";
+
 
 function EditEmployee() {
   const navigate = useNavigate();
@@ -58,36 +61,72 @@ function EditEmployee() {
   }, [id]);
 
   const handleUpdate = async (payload) => {
-    const token = localStorage.getItem('access_token');
+  const token = localStorage.getItem("access_token");
 
-    const res = await fetch(`${BASE_URL}/employee/${id}/update`, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
+  try {
+    
+    Swal.fire({
+      title: "Updating employee...",
+      text: "Please wait",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
       },
-      body: JSON.stringify(payload)
     });
 
-    if (res.ok) {
-      alert("Employee updated successfully");
-      navigate('/admin/view-employee');
-      return true;
-    }
+    const res = await fetch(`${BASE_URL}/employee/${id}/update`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) throw new Error("Update failed");
+
+   
+    await Swal.fire({
+      icon: "success",
+      title: "Updated",
+      text: "Employee updated successfully.",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+
+    navigate("/admin/view-employee");
+    return true;
+
+  } catch (error) {
+    console.error(error);
+
+    
+    await Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Failed to update employee.",
+    });
 
     return false;
-  };
+  }
+};
+
 
   return (
     <div>
       <Header />
       <div className='edit-employee'>
         <div className='edit-heading'>
-        <h3>Edit Employee</h3>
+        
         <div className="back-row">
                   
-                  <IoIosArrowBack className='back-btn' onClick={() => navigate('/products')} />
+                  <IoIosArrowBack 
+                      className='back-btn' 
+                      onClick={() => navigate('/admin/view-employee')} 
+                    />
+
                 </div>
+          <h3>Edit Employee</h3>
           </div>
 
         {employee && (

@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebookF } from "react-icons/fa";
+
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 function Login() {
@@ -33,19 +32,16 @@ function Login() {
 }
 
 
-  const handleLogin = async () => {
+const handleLogin = async () => {
   if (!validate()) return;
 
-
   setLoading(true);
-  setError("");
+  setError(""); // clear previous server error
 
   try {
     const res = await fetch(`${BASE_URL}/token`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
         username: uname,
         password: password,
@@ -53,27 +49,22 @@ function Login() {
     });
 
     const data = await res.json();
+    console.log(data)
 
     if (!res.ok) {
-      throw new Error(data.detail || "Login failed");
+      // Set error here instead of throwing
+      setError(data.detail || "Username or password is wrong");
+      return;
     }
 
     localStorage.setItem("system_role_id", data.sr_id);
+    localStorage.setItem("access_token", data.access_token);
+    localStorage.setItem("username",data.username);
 
-      const role = Number(data.sr_id);
-
-      console.log("LOGIN RESPONSE:", data);
-      console.log("ROLE:", role, typeof role);
-      localStorage.setItem("access_token", data.access_token);
-   
-  
-    
-
+    const role = Number(data.sr_id);
 
     switch (role) {
       case 1:
-        navigate("/dashboard");
-        break;
       case 2:
         navigate("/dashboard");
         break;
@@ -83,18 +74,13 @@ function Login() {
       default:
         navigate("/");
     }
-    
-
-
-
   } catch (err) {
-    setError(err.message);
+    setError("Username or password is wrong");
   } finally {
-    setFieldErrors({})
-    setError("")
     setLoading(false);
   }
 };
+
 
 
   return (
@@ -141,8 +127,10 @@ function Login() {
 
           {/* Login button */}
           <button className="login-btn" onClick={handleLogin} disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+             {loading ? <div className="spinner"></div> : "Log In"}
           </button>
+            <p className="error-text server-error">{error || " "}</p>
+
         </div>
 
         

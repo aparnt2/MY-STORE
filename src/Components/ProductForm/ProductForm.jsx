@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { LuUpload } from "react-icons/lu"
 import './ProductForm.css'
+import { useNavigate } from 'react-router-dom'
 
 function ProductForm({
   initialData = {},
@@ -9,6 +10,7 @@ function ProductForm({
   submitText
 }) 
 {
+  const navigate=useNavigate()
   const [formData, setFormData] = useState({
     product_name: "",
     price: "",
@@ -222,6 +224,7 @@ function ProductForm({
 
       {/* Submit Button */}
       <div className='buttoncontainer'>
+        <button className='btn-cancel' onClick={()=>navigate(-1)}>Cancel</button>
         <button className='btn-save' onClick={handleSubmit}>
           {submitText}
         </button>

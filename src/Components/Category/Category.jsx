@@ -9,7 +9,7 @@ function Category({ cat, onEdit, onDelete }) {
       <table className="data-table">
         <thead>
           <tr>
-            <th>ID</th>
+            
             <th>Image</th>
             <th>Name</th>
             <th>Actions</th>
@@ -18,7 +18,7 @@ function Category({ cat, onEdit, onDelete }) {
         <tbody>
           {cat.map(c => (
             <tr key={c.category_id}>
-              <td>{c.category_id}</td>
+              
               <td>
                 <div className="image-wrapper">
                   <img src={c.image_url} alt={c.category_name} />

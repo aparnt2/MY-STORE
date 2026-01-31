@@ -80,7 +80,7 @@ function App() {
           />
 
           <Route
-            path="/edit-product"
+            path="/edit-product/:id"
             element={
               <ProtectedRoute allowedRoles={[1, 2]}>
                 <EditProduct />

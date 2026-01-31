@@ -40,14 +40,16 @@ function DashboardStats({show}) {
   return (
    <div className="dashboard-stats">
      {(show === "all" || show === "productsOnly") && (
-  <div className="stat-card">Products <h2>{count.products}</h2> </div>
+ <div className="stat-card products">Products <h2>{count.products}</h2></div>
 )}
 
 {show === "all" && (
   <>
-    <div className="stat-card">Departments <h2>{count.departments}</h2></div>
-    <div className="stat-card">Roles <h2>{count.roles}</h2> </div>
-    <div className="stat-card">Categories <h2>{count.categories}</h2> </div>
+    
+<div className="stat-card departments">Departments <h2>{count.departments}</h2></div>
+<div className="stat-card roles">Roles <h2>{count.roles}</h2></div>
+<div className="stat-card categories">Categories <h2>{count.categories}</h2></div>
+
   </>
 )}
 

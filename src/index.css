@@ -85,3 +85,11 @@ button {
   align-items: center;
   z-index: 9999;
 }
+.btn-cancel {
+    width: 100px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    cursor: pointer;
+}

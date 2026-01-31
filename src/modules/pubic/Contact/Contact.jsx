@@ -3,15 +3,16 @@ import './Contact.css'
 import { MdEmail } from "react-icons/md";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import Header from '../../../Components/Header/Header';
 import Footer from '../../../Components/Footer/Footer';
 import { motion } from "framer-motion";
+import PubilcHeader from '../../../Components/Header/PublicHeader'
 
 
 function Contact() {
   return (
     <div className="contact-page">
-      <Header />
+      <PubilcHeader/>
+      
 
       {/* Animate the container */}
       <motion.div

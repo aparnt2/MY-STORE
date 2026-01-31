@@ -1,0 +1,122 @@
+.public-header {
+  width: 100%;
+  height: 64px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #0F1B3D;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+  position: sticky;   /* stays in flow */
+  top: 0;
+  z-index: 1000;
+
+  padding: 0 40px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+}
+
+.logo-sec {
+  background: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.logo-icon {
+  font-size: 22px;
+  color: var(--primary);
+}
+
+/* Navbar center fix */
+.header-section-link {
+  background:  rgba(255,255,255,0.18);;
+  padding: 6px 10px;
+  border-radius: 999px;
+}
+.header-section-link a {
+    color: white;
+  
+}
+
+/* User section */
+.user-logout {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/* Profile pill */
+/* Profile pill */
+.user-sec {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  padding: 5px 12px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.18);
+  color: white;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Avatar circle */
+.avatar-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  background: white;
+  color: var(--primary);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+}
+
+/* Hello text */
+.hello-text {
+  white-space: nowrap;
+}
+
+.user {
+  font-size: 18px;
+  color: white;
+}
+
+/* Logout button */
+.logout-sec {
+  padding: 6px 14px;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border: none;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.logout-sec h4 {
+  color: white;
+  font-size: 13px;
+}
+
+.logout-sec:hover {
+ transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(239,68,68,0.4);
+  filter: brightness(1.05);
+}

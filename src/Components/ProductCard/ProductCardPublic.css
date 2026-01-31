@@ -132,6 +132,10 @@
   font-size: 15px;
   color: var(--primary);
 }
+.amount{
+   color: var(--primary);
+   font-weight: 700
+}
 
 /* ================= BUTTON ================= */
 

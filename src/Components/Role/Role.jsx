@@ -9,7 +9,7 @@ function Role({ roles, OnEdit, onDelete }) {
       <table className="data-table">
         <thead>
           <tr>
-            <th>ID</th>
+            
             <th>Code</th>
             <th>Name</th>
             <th>Actions</th>
@@ -18,7 +18,7 @@ function Role({ roles, OnEdit, onDelete }) {
         <tbody>
           {roles.map(r => (
             <tr key={r.role_id}>
-              <td>{r.role_id}</td>
+              
               <td>{r.role_code}</td>
               <td>{r.role_name}</td>
               <td>

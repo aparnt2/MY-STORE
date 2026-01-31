@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import ProductCardPublic from '../../../Components/ProductCard/ProductCardPublic'
 import { useNavigate, useLocation } from 'react-router-dom'
-import Header from '../../../Components/Header/Header'
+import Header from '../../../Components/Header/AdminHeader'
 import Footer from '../../../Components/Footer/Footer'
 import Loader from '../../../Components/Loader/Loader'
 import { IoIosArrowBack } from "react-icons/io";
 import Search from '../../../Components/Search/Search'
 import Filter from '../../../Components/Filter/Filter'
 import './Products.css'
+import PubilcHeader from '../../../Components/Header/PublicHeader'
 
 function Products() {
   const BASE_URL = import.meta.env.VITE_BASE_URL
@@ -95,12 +96,10 @@ useEffect(() => {
   // ================= UI =================
   return (
     <div className='product-page' >
-      <Header />
-
+      <PubilcHeader/>
+      
       <div className='viewproductbody'>
-        <div className='back-row'>
-          <IoIosArrowBack className='back-btn' onClick={() => navigate('/home')} />
-        </div>
+        
 
         <div className='search-sort'>
           <Filter

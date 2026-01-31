@@ -1,7 +1,8 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate,Navigate  } from "react-router-dom";
 
 function ProtectedRoute({ children, allowedRoles }) {
+  const navigate = useNavigate();
   const token = localStorage.getItem("access_token");
   const roleid = Number(localStorage.getItem("system_role_id"));
 
@@ -21,7 +22,7 @@ function ProtectedRoute({ children, allowedRoles }) {
           style={{ padding: "10px 20px", cursor: "pointer", backgroundColor:'var(--primary)',borderRadius:"8px", color:"white", marginTop:'10px' }}
           onClick={() => {
             localStorage.clear();
-            window.location.href = "/";
+            navigate('/');
           }}
         >
           Back to Login

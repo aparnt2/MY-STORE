@@ -9,7 +9,7 @@ function Department({ dep, onEdit, onDelete }) {
       <table className="data-table">
         <thead>
           <tr>
-            <th>ID</th>
+           
             <th>Code</th>
             <th>Name</th>
             <th>Actions</th>
@@ -18,7 +18,7 @@ function Department({ dep, onEdit, onDelete }) {
         <tbody>
           {dep.map(d => (
             <tr key={d.id}>
-              <td>{d.id}</td>
+             
               <td>{d.code}</td>
               <td>{d.name}</td>
               <td>

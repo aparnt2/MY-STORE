@@ -1,14 +1,16 @@
 import React from 'react'
-import Header from '../../../Components/Header/Header'
+import Header from '../../../Components/Header/AdminHeader'
 import Footer from '../../../Components/Footer/Footer'
 import './About.css'
 import { motion } from "framer-motion";
+import PubilcHeader from '../../../Components/Header/PublicHeader'
 
 
 function About() {
   return (
     <div>
-        <Header/>
+        <PubilcHeader/>
+       
         <motion.div
                 className='about-container'
                 initial={{ opacity: 0, y: 30 }}

@@ -1,12 +1,15 @@
 import React from 'react'
-import { LuLogOut } from "react-icons/lu";
+import { TbLogout2 } from "react-icons/tb";
 import { FaShop } from "react-icons/fa6";
-import './Header.css'
+import './AdminHeader.css'
 import { useNavigate } from 'react-router-dom';
+import { FaUser } from "react-icons/fa6";
 
-function Header() {
+function AdminHeader() {
   const navigate=useNavigate()
   const BASE_URL=import.meta.env.VITE_BASE_URL
+  const username=localStorage.getItem('username')
+  
 
   const handilelogout=async()=>{
     const token=localStorage.getItem('access_token')
@@ -29,21 +32,31 @@ function Header() {
   }
   return (
     
-          <header>
+          <header className="admin-header">
               <div className='logo'>
               <div className='logo-sec'><FaShop className='logo-icon'/></div>
               <h4>MyStore</h4>
               </div>
-              <div className='logout-sec'>
+              <div className='user-logout'>
+                  <div className="user-sec">
+                                    <div className="avatar-circle">
+                                        <FaUser />
+                                    </div>
+                                    <span className="hello-text">Hello, {username}</span>
+                                    </div>
+              <div className='logout-sec' onClick={handilelogout}>
               
-              <div className='logout-icon' onClick={handilelogout}><LuLogOut className='logout' /></div>
-
+              
+                <h4>Logout</h4>
                 
               </div>
+
+              </div>
+             
           </header>
       
     
   )
 }
 
-export default Header
+export default  AdminHeader

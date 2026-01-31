@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../../../Components/Header/Header'
+import Header from '../../../Components/Header/AdminHeader'
 import { IoIosArrowBack } from "react-icons/io"
 import { useNavigate } from 'react-router-dom'
 import ProductForm from '../../../Components/ProductForm/ProductForm'
 import './AddProduct.css'
+import Swal from "sweetalert2";
+
 
 function AddProduct() {
   const BASE_URL = import.meta.env.VITE_BASE_URL
@@ -29,33 +31,76 @@ function AddProduct() {
     return data.image_url
   }
 
- const handleAddProduct = async (data) => {
+const handleAddProduct = async (data) => {
+  
   if (!data.imageFile || !data.category_id) {
-    alert("Image and category are required")
-    return false
+    await Swal.fire({
+      icon: "warning",
+      title: "Validation Error",
+      text: "Image and category are required.",
+    });
+    return false;
   }
 
-  const image_url = await uploadImage(data.imageFile)
+  try {
+    
+    Swal.fire({
+      title: "Uploading...",
+      text: "Please wait",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      },
+    });
 
-  const payload = {
-    product_name: data.product_name,
-    price: Number(data.price),
-    stock: Number(data.stock),
-    description: data.description,
-    image_url,
-    category_id: Number(data.category_id)
+    const image_url = await uploadImage(data.imageFile);
+
+    const payload = {
+      product_name: data.product_name,
+      price: Number(data.price),
+      stock: Number(data.stock),
+      description: data.description,
+      image_url,
+      category_id: Number(data.category_id),
+    };
+
+    const res = await fetch(`${BASE_URL}/product/`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const result= await res.json()
+
+    if (!res.ok) {
+      throw new Error(result.detail || "save failed");
+
+    }
+    
+    await Swal.fire({
+      icon: "success",
+      title: "Product Added",
+      text: "Product has been added successfully.",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+
+    navigate("/view-product");
+    return true;
+
+  } catch (error) {
+    console.error(error);
+
+    
+    await Swal.fire({
+      icon: "error",
+      title: "Error",
+     text: error.message,
+    });
+
+    return false;
   }
+};
 
-  await fetch(`${BASE_URL}/product/`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  })
-
-  alert("Product added successfully")
-  navigate('/view-product')
-  return true   
-}
 
   return (
     <>
@@ -79,7 +124,7 @@ function AddProduct() {
           category_id: "",
           image_url: ""
         }}
-        submitText="Add Product"
+        submitText="Add"
         onSubmit={handleAddProduct}
       />
     </>

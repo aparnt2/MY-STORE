@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-import Header from "../../../Components/Header/Header";
+import Header from "../../../Components/Header/AdminHeader";
 import { FaPlus } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa"; 
 import './dashboard.css'

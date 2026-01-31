@@ -19,9 +19,9 @@ function ProductCardPublic({ p }) {
             <span className="currency">₹</span>
             <span className="amount">{p.price.toLocaleString()}</span>
           </div>
-          <button className="add-btn" onClick={(e)=>e.stopPropagation()}>
+          {/* <button className="add-btn" onClick={(e)=>e.stopPropagation()}>
             Add <span className="plus">+</span>
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./EmployeeModel.css";
+import { useNavigate } from "react-router-dom";
 
 function EmployeeModel({
   initialData = {},
@@ -9,6 +10,7 @@ function EmployeeModel({
   onSubmit,
 }) {
 
+  const navigate=useNavigate()
   const [formData, setFormData] = useState({
     fullname: "",
     phnum: "",
@@ -78,6 +80,9 @@ useEffect(() => {
     setErrors(e);
     return Object.keys(e).length === 0;
   };
+
+
+  
 
   // Submit
 const handleSubmit = async () => {
@@ -218,9 +223,11 @@ const handleSubmit = async () => {
 
       {/* Submit Button */}
       <div className="buttoncontainer">
+         <button type="button" onClick={()=>navigate(-1)} className="btn-cancel">Cancel</button>
         <button className="btn-save" onClick={handleSubmit}>
-          {isEdit ? "Update Employee" : "Add Employee"}
+          {isEdit ? "Update " : "Add "}
         </button>
+       
       </div>
     </div>
   );

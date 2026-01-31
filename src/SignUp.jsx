@@ -116,10 +116,11 @@ const handleSignup = async () => {
             {loading ? <div className="spinner"></div> : "Sign Up"}
 
           </button>
+           <p className="error-text server-error">{error || " "}</p>
         </div>
 
-        
-
+          
+         
 
        
 
