@@ -69,7 +69,7 @@ function MasterData() {
       console.log("Role:", res.status, data);
 
       if (!res.ok) {
-        throw new Error(data.detail || data.message || "Role save failed");
+        throw new Error(data.detail  || "Role save failed");
       }
 
       if (md.editRole) {
@@ -116,7 +116,7 @@ function MasterData() {
       console.log("Category:", res.status, data);
 
       if (!res.ok) {
-        throw new Error(data.detail || data.message || "Category save failed");
+        throw new Error(data.detail  || "Category save failed");
       }
 
       if (md.editCategory) {
@@ -151,25 +151,80 @@ function MasterData() {
   const deleteDept = async (id) => {
     const ok = await md.swalConfirm("Delete department?");
     if (!ok.isConfirmed) return;
-    await fetch(`${BASE_URL}/department/${id}/delete`);
-    md.setDepartment(prev => prev.filter(d => d.id !== id));
-    md.swalSuccess("Deleted");
+    try{
+      const res=await fetch(`${BASE_URL}/department/${id}/delete`);
+      let data = {};
+        try {
+          data = await res.json();
+        } catch {
+          data = {};
+        }
+      if (!res.ok) {
+        throw new Error(data.detail  || "failed to delete Department");
+      }
+       md.setDepartment(prev => prev.filter(d => d.id !== id));
+      md.swalSuccess("Deleted");
+
+    }catch(err){
+       console.error("DELETE ERROR:", err);
+      md.swalError(err.message || "Delete failed");   
+
+    }
+    
+   
   };
 
   const deleteRole = async (id) => {
     const ok = await md.swalConfirm("Delete role?");
     if (!ok.isConfirmed) return;
-    await fetch(`${BASE_URL}/role/${id}/delete`);
-    md.setRole(prev => prev.filter(r => r.role_id !== id));
-    md.swalSuccess("Deleted");
+    try{
+       const res=await fetch(`${BASE_URL}/role/${id}/delete`);
+       let data={}
+
+       try{
+        data=await res.json()
+
+       }catch{
+        data={}
+
+       }
+       if(!res.ok){throw new Error(data.detail|| 'failed to delete Role')}
+
+        md.setRole(prev => prev.filter(r => r.role_id !== id));
+        md.swalSuccess("Deleted");
+
+    }catch(err){
+      console.error("DELETE ERROR:", err);
+      md.swalError(err.message || "Delete failed");   
+
+    }
+   
   };
 
   const deleteCategory = async (id) => {
     const ok = await md.swalConfirm("Delete category?");
     if (!ok.isConfirmed) return;
-    await fetch(`${BASE_URL}/category/${id}/delete`);
-    md.setCategory(prev => prev.filter(c => c.category_id !== id));
-    md.swalSuccess("Deleted");
+    try{
+        const res=await fetch(`${BASE_URL}/category/${id}/delete`);
+        
+        let data={}
+        try{
+          data =await res.json()
+        }catch{
+          data={}
+        }
+        if(!res.ok){
+          throw new Error(data.detail ||"failed to delete category")
+        }
+         md.setCategory(prev => prev.filter(c => c.category_id !== id));
+         md.swalSuccess("Deleted");
+    }catch(err){
+      console.error("DELETE ERROR:", err);
+      md.swalError(err.message || "Delete failed");   
+
+    }
+    
+   
   };
 
   // ================= UI =================

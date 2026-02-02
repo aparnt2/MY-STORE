@@ -72,6 +72,11 @@ function EditEmployee() {
       didOpen: () => {
         Swal.showLoading();
       },
+      customClass: {
+        popup: 'modern-popup success-border',
+        title: 'modern-title',
+        htmlContainer: 'modern-text'
+    }
     });
 
     const res = await fetch(`${BASE_URL}/employee/${id}/update`, {
@@ -82,8 +87,9 @@ function EditEmployee() {
       },
       body: JSON.stringify(payload),
     });
+    const data=await res.json()
 
-    if (!res.ok) throw new Error("Update failed");
+    if (!res.ok) throw new Error(data.detail ||"failled to update");
 
    
     await Swal.fire({
@@ -92,6 +98,11 @@ function EditEmployee() {
       text: "Employee updated successfully.",
       timer: 1500,
       showConfirmButton: false,
+      customClass: {
+        popup: 'modern-popup success-border',
+        title: 'modern-title',
+        htmlContainer: 'modern-text'
+    }
     });
 
     navigate("/admin/view-employee");
@@ -104,7 +115,7 @@ function EditEmployee() {
     await Swal.fire({
       icon: "error",
       title: "Error",
-      text: "Failed to update employee.",
+      text: error.message,
     });
 
     return false;

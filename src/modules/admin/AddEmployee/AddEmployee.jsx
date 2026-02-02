@@ -15,6 +15,7 @@ function AddEmployee() {
     const[role,SetRole]=useState([])
     const[department,SetDepatment]=useState([])
     
+    
     const navigate=useNavigate()
 
     useEffect(()=>{
@@ -45,8 +46,11 @@ const handleAddEmployee = async (payload) => {
     });
 
     const data = await res.json();
+    if(!res.ok){
+      throw new Error(data.detail || "failed to add employee")
+    }
 
-    if (res.ok) {
+    
      
       await Swal.fire({
         icon: "success",
@@ -54,21 +58,17 @@ const handleAddEmployee = async (payload) => {
         text: "Employee has been added successfully.",
         timer: 1500,
         showConfirmButton: false,
+        customClass: {
+        popup: 'modern-popup success-border',
+        title: 'modern-title',
+        htmlContainer: 'modern-text'
+    }
       });
 
       navigate("/admin/view-employee");
       return true;
 
-    } else {
-      
-      await Swal.fire({
-        icon: "error",
-        title: "Failed",
-        text: data.message || "Failed to add employee",
-      });
-
-      return false;
-    }
+    
 
   } catch (err) {
     console.error(err);
@@ -77,7 +77,13 @@ const handleAddEmployee = async (payload) => {
     await Swal.fire({
       icon: "error",
       title: "Error",
-      text: "Something went wrong while adding employee.",
+      text: err.message,
+       customClass: {
+      popup: 'modern-popup error-border',
+      title: 'modern-title',
+      htmlContainer: 'modern-text',
+      confirmButton: 'modern-btn btn-danger'
+    }
     });
 
     return false;

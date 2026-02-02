@@ -55,9 +55,15 @@ function ViewEmployee() {
     text: "This employee will be permanently deleted!",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: "#dc2626",
-    cancelButtonColor: "#6b7280",
-    confirmButtonText: "Yes, delete!",
+   buttonsStyling: false,
+    confirmButtonText: "Yes, delete it!",
+    customClass: {
+      popup: 'modern-popup warning-border',
+      title: 'modern-title',
+      htmlContainer: 'modern-text',
+      confirmButton: 'modern-btn btn-danger',
+      cancelButton: 'modern-btn btn-secondary'
+    }
   });
 
   if (!result.isConfirmed) return;
@@ -83,6 +89,11 @@ function ViewEmployee() {
       text: "Employee removed successfully.",
       timer: 1500,
       showConfirmButton: false,
+      customClass: {
+      popup: 'modern-popup success-border',
+      title: 'modern-title',
+      htmlContainer: 'modern-text'
+    }
     });
 
   } catch (err) {
@@ -91,6 +102,12 @@ function ViewEmployee() {
       icon: "error",
       title: "Error",
       text: "Failed to delete employee.",
+      customClass: {
+      popup: 'modern-popup error-border',
+      title: 'modern-title',
+      htmlContainer: 'modern-text',
+      confirmButton: 'modern-btn btn-danger'
+    }
     });
   }
 };

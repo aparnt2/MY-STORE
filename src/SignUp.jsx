@@ -4,6 +4,8 @@ import "./login.css";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import Swal from "sweetalert2";
+
 
 function Sign_up() {
 const[uname,setUname]=useState('')
@@ -60,11 +62,27 @@ const handleSignup = async () => {
 
     const data = await res.json();
 
-    if (!res.ok) {
-      throw new Error(data.detail || "Signup failed");
-    }
+          if (!res.ok) {
+        throw new Error(data.detail || "Signup failed");
+      }
 
-    navigate("/");
+          await Swal.fire({
+      icon: "success",
+      title: "Account created",
+      text: "Your account has been created successfully",
+      confirmButtonText: "Login",
+      // We remove confirmButtonColor here because we will handle it via CSS for a more modern look
+      buttonsStyling: false, 
+      customClass: {
+        popup: 'modern-swal-popup',
+        title: 'modern-swal-title',
+        htmlContainer: 'modern-swal-text',
+        confirmButton: 'modern-swal-button'
+      }
+    });
+
+        navigate("/");
+
 
   } catch (err) {
     setError(err.message);

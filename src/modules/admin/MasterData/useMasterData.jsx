@@ -51,22 +51,50 @@ export default function useMasterData(BASE_URL) {
   };
 
   // ================= ALERTS =================
-  const swalSuccess = (text) =>
-    Swal.fire({ icon: "success", title: "Success", text, timer: 1500, showConfirmButton: false });
+ const swalSuccess = (text) =>
+  Swal.fire({
+    icon: "success",
+    title: "Success",
+    text,
+    timer: 1500,
+    showConfirmButton: false,
+    customClass: {
+      popup: 'modern-popup success-border',
+      title: 'modern-title',
+      htmlContainer: 'modern-text'
+    }
+  });
 
-  const swalError = (text) =>
-    Swal.fire({ icon: "error", title: "Error", text, confirmButtonColor: "#dc2626" });
+const swalError = (text) =>
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text,
+    buttonsStyling: false,
+    customClass: {
+      popup: 'modern-popup error-border',
+      title: 'modern-title',
+      htmlContainer: 'modern-text',
+      confirmButton: 'modern-btn btn-danger'
+    }
+  });
 
-  const swalConfirm = (text) =>
-    Swal.fire({
-      title: "Are you sure?",
-      text,
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#dc2626",
-      cancelButtonColor: "#6b7280",
-      confirmButtonText: "Yes, delete it!",
-    });
+const swalConfirm = (text) =>
+  Swal.fire({
+    title: "Are you sure?",
+    text,
+    icon: "warning",
+    showCancelButton: true,
+    buttonsStyling: false,
+    confirmButtonText: "Yes, delete it!",
+    customClass: {
+      popup: 'modern-popup warning-border',
+      title: 'modern-title',
+      htmlContainer: 'modern-text',
+      confirmButton: 'modern-btn btn-danger',
+      cancelButton: 'modern-btn btn-secondary'
+    }
+  });
 
   return {
     // tabs & modal

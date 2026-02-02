@@ -82,6 +82,11 @@ const handleAddProduct = async (data) => {
       text: "Product has been added successfully.",
       timer: 1500,
       showConfirmButton: false,
+      customClass: {
+        popup: 'modern-popup success-border',
+        title: 'modern-title',
+        htmlContainer: 'modern-text'
+    }
     });
 
     navigate("/view-product");

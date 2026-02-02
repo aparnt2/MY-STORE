@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./EmployeeModel.css";
 import { useNavigate } from "react-router-dom";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+
 
 function EmployeeModel({
   initialData = {},
@@ -22,6 +24,7 @@ function EmployeeModel({
   const [selectedrole, setSelectedrole] = useState("");
 
   const [errors, setErrors] = useState({});
+   const [showPassword, setShowPassword] = useState(false);
 
 useEffect(() => {
   if (!initialData || !isEdit) return;
@@ -40,46 +43,58 @@ useEffect(() => {
 
 
   // Validation
-  const validate = () => {
-    const e = {};
+const validate = () => {
+  const e = {};
 
-    if (!formData.fullname.trim()) {
-      e.fullname = "Full name is required";
-    } else if (formData.fullname.length < 3) {
-      e.fullname = "Name must be at least 3 characters";
+  
+  if (!formData.fullname.trim()) {
+    e.fullname = "Full name is required";
+  } else if (formData.fullname.length < 3) {
+    e.fullname = "Full name must be at least 3 characters";
+  } else if (!/^[a-zA-Z ]+$/.test(formData.fullname.trim())) {
+    e.fullname = "Full name can only contain letters and spaces";
+  }
+
+  
+  if (!formData.phnum.trim()) {
+    e.phnum = "Phone number is required";
+  } else if (!/^\d{10}$/.test(formData.phnum.trim())) {
+    e.phnum = "Phone number must be 10 digits";
+  }
+
+ 
+  if (!formData.username.trim()) {
+    e.username = "Username is required";
+  } else if (formData.username.length < 3) {
+    e.username = "Username must be at least 3 characters";
+  } else if (!/^[a-z0-9._]+$/.test(formData.username.trim())) {
+    e.username = "Username can only contain lowercase letters, numbers, dot, or underscore";
+  }
+
+ 
+  if (!isEdit) {
+    if (!formData.password.trim()) {
+      e.password = "Password is required";
+    } else if (formData.password.length < 6) {
+      e.password = "Password must be at least 6 characters";
+    } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/.test(formData.password)) {
+      e.password = "Password must include uppercase, lowercase, number, and special character";
     }
+  }
 
-    if (!formData.phnum.trim()) {
-      e.phnum = "Phone number is required";
-    } else if (isNaN(formData.phnum) || Number(formData.phnum) <= 0) {
-      e.phnum = "Phone number must be valid";
-    }
+  
+  if (!selecteddept) {
+    e.department = "Department is required";
+  }
 
-    if (!formData.username.trim()) {
-      e.username = "Username is required";
-    } else if (formData.username.length < 3) {
-      e.username = "Username must be at least 3 characters";
-    }
+  if (!selectedrole) {
+    e.role = "Role is required";
+  }
 
-    if (!isEdit) {
-      if (!formData.password.trim()) {
-        e.password = "Password is required";
-      } else if (formData.password.length < 6) {
-        e.password = "Password must be at least 6 characters";
-      }
-    }
+  setErrors(e);
+  return Object.keys(e).length === 0;
+};
 
-    if (!selecteddept) {
-      e.department = "Department is required";
-    }
-
-    if (!selectedrole) {
-      e.role = "Role is required";
-    }
-
-    setErrors(e);
-    return Object.keys(e).length === 0;
-  };
 
 
   
@@ -172,14 +187,21 @@ const handleSubmit = async () => {
           <div className="form-group">
             <label>Password</label>
             <p className="error-text">{errors.password || " "}</p>
-            <input
-              type="password"
+            <div className="password-container">
+               <input
+              type={showPassword ? "text" : "password"}
               value={formData.password}
               onChange={(e) => {
                 setFormData({ ...formData, password: e.target.value });
                 setErrors(prev => ({ ...prev, password: "" }));
               }}
             />
+             <span className="eye-icon" onClick={() => setShowPassword(!showPassword)}>
+                                     {showPassword ? <AiFillEye /> : <AiFillEyeInvisible />}
+              </span>
+              
+            </div>
+           
           </div>
         )}
 

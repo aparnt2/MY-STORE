@@ -11,4 +11,5 @@
 .back-icon {
   cursor: pointer;
   font-size: 22px;
+  color: var(--primary);
 }
