@@ -69,10 +69,10 @@ const handleLogin = async () => {
         navigate("/dashboard");
         break;
       case 3:
-        navigate("/home");
+        navigate("/");
         break;
       default:
-        navigate("/");
+        navigate("/login");
     }
   } catch (err) {
     setError("Username or password is wrong");
@@ -137,7 +137,7 @@ const handleLogin = async () => {
 
         
         <p className="signup-text">
-          Don’t have an account? <Link to="sign_up">Sign up</Link>
+          Don’t have an account? <Link to="/sign_up">Sign up</Link>
         </p>
       </div>
     </div>

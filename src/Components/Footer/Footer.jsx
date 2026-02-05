@@ -15,7 +15,7 @@ function Footer() {
           
             <div className='footer-col'>
                 <h4>About Us</h4>
-                 <Link to='/home'>Home</Link>
+                 <Link to='/'>Home</Link>
 
                 <Link to='/about'>About MYSTORE</Link>
                 

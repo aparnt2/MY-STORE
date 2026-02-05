@@ -48,7 +48,7 @@
 }
 
 /* User section */
-.user-logout {
+.user-log{
   display: flex;
   align-items: center;
   gap: 14px;
@@ -93,30 +93,90 @@
   white-space: nowrap;
 }
 
-.user {
-  font-size: 18px;
-  color: white;
-}
+
 
 /* Logout button */
-.logout-sec {
+.login {
   padding: 6px 14px;
   border-radius: 999px;
 
-  background: linear-gradient(135deg, #ef4444, #dc2626);
+  background: var(--primary);
   border: none;
 
   cursor: pointer;
   transition: 0.2s;
 }
 
-.logout-sec h4 {
+.login h4 {
   color: white;
   font-size: 13px;
 }
 
-.logout-sec:hover {
+.login:hover {
  transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(239,68,68,0.4);
+  background:  var(--primary-hover);
   filter: brightness(1.05);
+}
+
+.signup{
+   padding: 6px 14px;
+  border-radius: 999px;
+
+  background: white;
+  border: none;
+  
+
+  cursor: pointer;
+  transition: 0.2s;
+
+}
+.signup h4 {
+  color: var(--primary);
+  font-size: 13px;
+}
+.signup:hover {
+ transform: translateY(-1px);
+  color:  var(--primary-hover);;
+  filter: brightness(1.05);
+}
+.user-sec {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+
+  padding: 5px 12px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.18);
+  color: white;
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Avatar circle */
+.avatar-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  background: white;
+  color: var(--primary);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 14px;
+}
+
+/* Hello text */
+.hello-text {
+  white-space: nowrap;
+}
+
+.user {
+  font-size: 18px;
+  color: white;
 }

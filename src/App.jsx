@@ -38,8 +38,9 @@ function App() {
 
       <Suspense fallback={<div style={{ padding: 20 }}>Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Home />} />
           <Route path="/sign_up" element={<Sign_up />} />
+          <Route path="/login" element={<Login/>}/>
 
 
           {/* admin & employee */}
@@ -115,49 +116,41 @@ function App() {
             }
           />
 
-          {/* public pages */}
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute allowedRoles={[1, 2, 3]}>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
+        
 
           <Route
             path="/products"
             element={
-              <ProtectedRoute allowedRoles={[1, 2, 3]}>
+              
                 <Products />
-              </ProtectedRoute>
+             
             }
           />
 
           <Route
             path="/product/:id"
             element={
-              <ProtectedRoute allowedRoles={[1, 2, 3]}>
+              
                 <ProductDetails />
-              </ProtectedRoute>
+             
             }
           />
 
           <Route
             path="/about"
             element={
-              <ProtectedRoute allowedRoles={[1, 2, 3]}>
+              
                 <About />
-              </ProtectedRoute>
+              
             }
           />
 
           <Route
             path="/contact"
             element={
-              <ProtectedRoute allowedRoles={[1, 2, 3]}>
+              
                 <Contact />
-              </ProtectedRoute>
+              
             }
           />
         </Routes>

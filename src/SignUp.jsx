@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
 import "./login.css";
-import { FcGoogle } from "react-icons/fc";
-import { FaFacebookF } from "react-icons/fa";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Swal from "sweetalert2";
 
@@ -71,7 +69,7 @@ const handleSignup = async () => {
       title: "Account created",
       text: "Your account has been created successfully",
       confirmButtonText: "Login",
-      // We remove confirmButtonColor here because we will handle it via CSS for a more modern look
+      
       buttonsStyling: false, 
       customClass: {
         popup: 'modern-swal-popup',
@@ -81,7 +79,7 @@ const handleSignup = async () => {
       }
     });
 
-        navigate("/");
+        navigate("/login");
 
 
   } catch (err) {
@@ -143,7 +141,7 @@ const handleSignup = async () => {
        
 
         <p className="signup-text">
-          already have an account?<Link to='/'>Log in</Link>
+          already have an account?<Link to='/login'>Log in</Link>
         </p>
       </div>
     </div>

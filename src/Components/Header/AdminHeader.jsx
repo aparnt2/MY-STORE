@@ -1,34 +1,46 @@
-import React from 'react'
-import { TbLogout2 } from "react-icons/tb";
 import { FaShop } from "react-icons/fa6";
 import './AdminHeader.css'
 import { useNavigate } from 'react-router-dom';
 import { FaUser } from "react-icons/fa6";
+import React, { useEffect, useState } from 'react'
+
 
 function AdminHeader() {
   const navigate=useNavigate()
   const BASE_URL=import.meta.env.VITE_BASE_URL
-  const username=localStorage.getItem('username')
+  
+  const [user, setUser] = useState(null)
+
+useEffect(() => {
+  const storedUser = localStorage.getItem('username')
+  setUser(storedUser)
+}, [])
+
   
 
-  const handilelogout=async()=>{
-    const token=localStorage.getItem('access_token')
-    console.log(token);
-    
-    const res=await fetch(`${BASE_URL}/logout`,{
-      method:'post',
-      headers:{
-        'Authorization':`Bearer ${token}`
+   const handleLogout = async () => {
+    try {
+      const token = localStorage.getItem('access_token')
+
+      if (token) {
+        await fetch(`${BASE_URL}/logout`, {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
       }
-    })
-    const data=await res.json()
-    console.log(data.message);
-    localStorage.removeItem('access_token')
-    navigate("/")
-    
+    } catch (error) {
+      console.error('Logout failed', error)
+    } finally {
+      localStorage.removeItem('access_token')
+      localStorage.removeItem('username')
+      localStorage.removeItem('system_role_id')
 
-    
+      setUser(null)
+      navigate('/login', { replace: true })
 
+    }
   }
   return (
     
@@ -42,9 +54,9 @@ function AdminHeader() {
                                     <div className="avatar-circle">
                                         <FaUser />
                                     </div>
-                                    <span className="hello-text">Hello, {username}</span>
+                                    <span className="hello-text">Hello, {user}</span>
                                     </div>
-              <div className='logout-sec' onClick={handilelogout}>
+              <div className='logout-sec' onClick={handleLogout}>
               
               
                 <h4>Logout</h4>
