@@ -1,54 +1,56 @@
 /* Container layout */
 .dashboard-stats {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: wrap;
 }
 
 /* Base Card Styling */
 .stat-card {
-    flex: 1;
-    min-width: 200px;
-    padding: 25px;
-    border-radius: 12px;
-    color: rgb(9, 9, 53);
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-weight: 500;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  flex: 1;
+  min-width: 200px;
+  padding: 25px;
+  border-radius: 12px;
+  color: rgb(9, 9, 53);
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  font-weight: 500;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .stat-card h2 {
-    margin: 10px 0 0;
-    font-size: 2.5rem;
-    font-weight: 700;
+  margin: 10px 0 0;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 /* Individual Colors - Matched to your theme */
 
 /* Products: A bright blue to match your sidebar buttons */
 .stat-card.products {
-    background: linear-gradient(135deg, #b7d7f3 0%, #acf6fc 100%);
+  background: linear-gradient(135deg, #b7d7f3 0%, #acf6fc 100%);
 }
 
 /* Departments: A soft purple/indigo to bridge the dark header and blue sidebar */
 .stat-card.departments {
-    background: linear-gradient(135deg, #94a4eb 0%, #8d6fac 100%);
+  background: linear-gradient(135deg, #94a4eb 0%, #8d6fac 100%);
 }
 
 /* Roles: A warm orange/amber for variety and visibility */
 .stat-card.roles {
-    background: linear-gradient(135deg, #f3da89 0%, #fab29e 100%);
+  background: linear-gradient(135deg, #f3da89 0%, #fab29e 100%);
 }
 
 /* Categories: A fresh teal/green */
 .stat-card.categories {
-    background: linear-gradient(135deg, #63aaa4 0%, #8df1b4 100%);
+  background: linear-gradient(135deg, #63aaa4 0%, #8df1b4 100%);
 }

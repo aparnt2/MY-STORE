@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import './ProductCard.css';
+import "./ProductCard.css";
 
 function ProductCard({ p, handiledelete, navigate }) {
   return (
@@ -22,17 +22,19 @@ function ProductCard({ p, handiledelete, navigate }) {
             <span className="amount">{p.price.toLocaleString()}</span>
           </div>
           <div className="edit-delete">
-            <button 
-              className="edit" 
-              onClick={() => navigate('/edit-product', { state: { product: p } })}
+            <button
+              className="edit"
+              onClick={() =>
+                navigate("/edit-product", { state: { product: p } })
+              }
             >
-              <FaEdit size={16}/>
+              <FaEdit size={16} />
             </button>
-            <button 
-              className="delete" 
+            <button
+              className="delete"
               onClick={() => handiledelete(p.product_id)}
             >
-              <MdDelete size={16}/>
+              <MdDelete size={16} />
             </button>
           </div>
         </div>

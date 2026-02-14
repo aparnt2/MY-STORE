@@ -2,65 +2,53 @@ import { NavLink } from "react-router-dom";
 
 import Header from "../../../Components/Header/AdminHeader";
 import { FaPlus } from "react-icons/fa";
-import { FaArrowRight } from "react-icons/fa"; 
-import './dashboard.css'
+import { FaArrowRight } from "react-icons/fa";
+import "./dashboard.css";
 import { useEffect } from "react";
 import DashboardStats from "../../../Components/DashBoard/DashboardStats";
 
 function AdminDashboard() {
-   const sytem_id=localStorage.getItem('system_role_id')
+  const sytem_id = localStorage.getItem("system_role_id");
 
-   
   return (
     <div className="admin-layout">
       <Header />
 
-      <div className="dashboard-container" >
+      <div className="dashboard-container">
         <aside className="sidebar">
+          {sytem_id == "1" && (
+            <>
+              <NavLink to="/admin/master-data" className="menu-item">
+                <FaPlus /> <span>Manage MasterData</span> <FaArrowRight />
+              </NavLink>
+              <NavLink to="/admin/add-employee" className="menu-item">
+                <FaPlus /> <span>Add Employee</span> <FaArrowRight />
+              </NavLink>
 
-           {
-                sytem_id=="1" &&(
-                    <>
-                    <NavLink to="/admin/master-data" className="menu-item">
-                      <FaPlus /> <span>Manage MasterData</span> <FaArrowRight />
-                    </NavLink>
-                    <NavLink to="/admin/add-employee" className="menu-item">
-                      <FaPlus /> <span>Add Employee</span> <FaArrowRight />
-                    </NavLink>
+              <NavLink to="/admin/view-employee" className="menu-item">
+                <FaPlus /> <span>View Employee</span> <FaArrowRight />
+              </NavLink>
+            </>
+          )}
 
-                    <NavLink to="/admin/view-employee" className="menu-item">
-                      <FaPlus /> <span>View Employee</span> <FaArrowRight />
-                    </NavLink>
+          {(sytem_id == "1" || sytem_id == "2") && (
+            <>
+              <NavLink to="/add-product" className="menu-item">
+                <FaPlus /> <span>Add Product</span> <FaArrowRight />
+              </NavLink>
 
-                    </>
-                )
-            }
-
-
-
-              {
-            (sytem_id=="1" ||sytem_id=="2")&&(
-                <>
-                  <NavLink to="/add-product" className="menu-item">
-                    <FaPlus /> <span>Add Product</span> <FaArrowRight />
-                  </NavLink>
-
-                  <NavLink to="/view-product" className="menu-item">
-                    <FaPlus /> <span>View Product</span> <FaArrowRight />
-                  </NavLink>
-
-                </>
-            )
-          }
-          
-         
+              <NavLink to="/view-product" className="menu-item">
+                <FaPlus /> <span>View Product</span> <FaArrowRight />
+              </NavLink>
+            </>
+          )}
         </aside>
 
         <main className="content">
-         <DashboardStats show={sytem_id === "1" ? "all" : "productsOnly"}/>
+          <DashboardStats show={sytem_id === "1" ? "all" : "productsOnly"} />
         </main>
       </div>
     </div>
   );
 }
-export default AdminDashboard
+export default AdminDashboard;

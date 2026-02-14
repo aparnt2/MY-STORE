@@ -4,7 +4,6 @@ import { Navigate } from "react-router-dom";
 function ProtectedRoute({ children, allowedRoles }) {
   const token = localStorage.getItem("access_token");
   const roleid = Number(localStorage.getItem("system_role_id"));
-
   
   if (!token) {
     return <Navigate to="/login" replace />;
@@ -14,7 +13,7 @@ function ProtectedRoute({ children, allowedRoles }) {
   if (allowedRoles && !allowedRoles.includes(roleid)) {
     return (
       <div style={{ padding: 40, textAlign: "center" }}>
-        <h2>403 - Access Denied</h2>
+        <h2>Access Denied</h2>
         <p>You do not have permission to view this page.</p>
 
         <button

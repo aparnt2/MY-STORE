@@ -1,13 +1,12 @@
-
 .emp-container {
   width: 100%;
- padding: 40px 0px;
+  padding: 40px 0px;
 }
 
 /* Form card */
 .form {
   width: 100%;
-  
+
   background: #fff;
   border-radius: 16px;
   padding: 28px 28px;
@@ -69,7 +68,7 @@
 }
 
 .buttoncontainer {
-    width: 100%;
+  width: 100%;
   margin-top: 20px;
   display: flex;
   justify-content: flex-end;
@@ -93,7 +92,7 @@
   background-color: var(--primary);
   color: white;
 }
-.btn-save:hover{
+.btn-save:hover {
   background-color: var(--primary-hover);
 }
 .password-container {

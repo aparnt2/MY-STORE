@@ -22,7 +22,6 @@
   height: 16px;
 }
 
-
 .data-table th {
   background: #f8fafc;
   font-weight: 700;
@@ -67,18 +66,16 @@
   max-width: 150px;
   white-space: nowrap; /* prevent wrapping */
   text-align: center;
-  padding: 5px;        /* reduce padding */
-  
+  padding: 5px; /* reduce padding */
 }
 
 /* Buttons inside Action column should scale down */
 .edit-btn,
 .delete-btn {
-    /* smaller padding */
-  font-size: 14px;     /* smaller font if needed */
-  width: auto;         /* remove any fixed width */
-  margin: 0;           /* remove extra margin */
- 
+  /* smaller padding */
+  font-size: 14px; /* smaller font if needed */
+  width: auto; /* remove any fixed width */
+  margin: 0; /* remove extra margin */
 }
 .edit-btn {
   margin-right: 10px; /* tiny gap to separate from delete */

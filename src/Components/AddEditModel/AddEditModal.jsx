@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import './AddEditModal.css';
-import { LuUpload } from 'react-icons/lu'; // make sure this import exists if you use it
+import React, { useState, useEffect } from "react";
+import "./AddEditModal.css";
+import { LuUpload } from "react-icons/lu"; // make sure this import exists if you use it
 
 function AddEditModal({
   activetab,
@@ -17,13 +17,12 @@ function AddEditModal({
   setRcode,
   cname,
   setCname,
- 
+
   imageFile,
   setImageFile,
   onClose,
-  onSave
+  onSave,
 }) {
- 
   const [preview, setPreview] = useState(editCategory?.image_url || null);
 
   useEffect(() => {
@@ -39,26 +38,28 @@ function AddEditModal({
   }, [imageFile, editCategory]);
 
   return (
-    <div className='modal-layout'>
-      <div className='model'>
+    <div className="modal-layout">
+      <div className="model">
         <h3>
-          {activetab === 'department' && (editdept ? 'Edit Department' : 'Add Department')}
-          {activetab === 'role' && (editRole ? 'Edit Role' : 'Add Role')}
-          {activetab === 'category' &&(editCategory ? 'Edit Category' : 'Add Category')}
+          {activetab === "department" &&
+            (editdept ? "Edit Department" : "Add Department")}
+          {activetab === "role" && (editRole ? "Edit Role" : "Add Role")}
+          {activetab === "category" &&
+            (editCategory ? "Edit Category" : "Add Category")}
         </h3>
 
-        <div className='model-form'>
+        <div className="model-form">
           {/* Department Inputs */}
-          {activetab === 'department' && (
+          {activetab === "department" && (
             <>
-             <label>Department Name</label>
+              <label>Department Name</label>
               <input
                 type="text"
                 placeholder="Enter department name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-               <label>Department Code</label>
+              <label>Department Code</label>
               <input
                 type="text"
                 placeholder="Enter department code"
@@ -69,9 +70,9 @@ function AddEditModal({
           )}
 
           {/* Role Inputs */}
-          {activetab === 'role' && (
+          {activetab === "role" && (
             <>
-            <label>Role Name</label>
+              <label>Role Name</label>
               <input
                 type="text"
                 placeholder="Enter role name"
@@ -89,20 +90,24 @@ function AddEditModal({
           )}
 
           {/* Category Inputs */}
-          {activetab === 'category' && (
+          {activetab === "category" && (
             <>
-            <label>Category Name</label>
+              <label>Category Name</label>
               <input
                 type="text"
                 placeholder="Enter category name"
                 value={cname}
                 onChange={(e) => setCname(e.target.value)}
               />
-            
+
               <div className="image-upload-container">
                 <label className="upload-box">
                   {preview ? (
-                    <img src={preview} alt="Preview" className="image-preview" />
+                    <img
+                      src={preview}
+                      alt="Preview"
+                      className="image-preview"
+                    />
                   ) : (
                     <div className="upload-placeholder">
                       <LuUpload className="upload-icon" />
@@ -122,9 +127,13 @@ function AddEditModal({
           )}
         </div>
 
-        <div className='btn-section'>
-          <button className='btn-cancel' onClick={onClose}>Cancel</button>
-          <button className='btn-save' onClick={onSave}>Save</button>
+        <div className="btn-section">
+          <button className="btn-cancel" onClick={onClose}>
+            Cancel
+          </button>
+          <button className="btn-save" onClick={onSave}>
+            Save
+          </button>
         </div>
       </div>
     </div>

@@ -30,7 +30,7 @@ function Hero() {
   if (loading) {
     return (
       <section className="hero">
-        <Loader/>
+        <Loader />
       </section>
     );
   }

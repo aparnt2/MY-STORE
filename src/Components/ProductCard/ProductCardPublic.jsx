@@ -1,5 +1,5 @@
-import React from 'react';
-import './ProductCardPublic.css';
+import React from "react";
+import "./ProductCardPublic.css";
 
 function ProductCardPublic({ p }) {
   return (
@@ -13,7 +13,7 @@ function ProductCardPublic({ p }) {
 
       <div className="product-body">
         <h2 className="product-name">{p.product_name}</h2>
-        
+
         <div className="product-footer">
           <div className="price-container">
             <span className="currency">₹</span>

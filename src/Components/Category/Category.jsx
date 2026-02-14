@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import './Category.css';
+import "./Category.css";
 
 function Category({ cat, onEdit, onDelete }) {
   return (
@@ -9,16 +9,14 @@ function Category({ cat, onEdit, onDelete }) {
       <table className="data-table">
         <thead>
           <tr>
-            
             <th>Image</th>
             <th>Name</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {cat.map(c => (
+          {cat.map((c) => (
             <tr key={c.category_id}>
-              
               <td>
                 <div className="image-wrapper">
                   <img src={c.image_url} alt={c.category_name} />
@@ -29,7 +27,10 @@ function Category({ cat, onEdit, onDelete }) {
                 <button className="edit-btn" onClick={() => onEdit(c)}>
                   <FaEdit size={16} />
                 </button>
-                <button className="delete-btn" onClick={() => onDelete(c.category_id)}>
+                <button
+                  className="delete-btn"
+                  onClick={() => onDelete(c.category_id)}
+                >
                   <MdDelete size={16} />
                 </button>
               </td>

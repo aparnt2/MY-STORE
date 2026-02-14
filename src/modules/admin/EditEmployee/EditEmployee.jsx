@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../../../Components/Header/AdminHeader';
-import EmployeeModel from '../../../Components/EmployeeModel/EmployeeModel';
-import { useNavigate, useParams } from 'react-router-dom';
-import { IoIosArrowBack } from "react-icons/io"
-import './EditEmployee.css';
+import React, { useEffect, useState } from "react";
+import Header from "../../../Components/Header/AdminHeader";
+import EmployeeModel from "../../../Components/EmployeeModel/EmployeeModel";
+import { useNavigate, useParams } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
+import "./EditEmployee.css";
 import Swal from "sweetalert2";
-
 
 function EditEmployee() {
   const navigate = useNavigate();
@@ -18,13 +17,13 @@ function EditEmployee() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = localStorage.getItem('access_token');
+      const token = localStorage.getItem("access_token");
 
       try {
         // Load role + department
         const [depres, roleres] = await Promise.all([
           fetch(`${BASE_URL}/department/`),
-          fetch(`${BASE_URL}/role/`)
+          fetch(`${BASE_URL}/role/`),
         ]);
 
         const depdata = await depres.json();
@@ -36,22 +35,20 @@ function EditEmployee() {
         // Load employee
         const empres = await fetch(`${BASE_URL}/employee/${id}`, {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         const empdata = await empres.json();
         console.log("Selected employee:", empdata);
 
-        
         setEmployee({
           name: empdata.name,
           phone_no: empdata.phone_no,
           username: empdata.user.username,
           department_id: empdata.department.id,
-          role_id: empdata.role.role_id
+          role_id: empdata.role.role_id,
         });
-
       } catch (err) {
         console.error(err);
       }
@@ -61,84 +58,76 @@ function EditEmployee() {
   }, [id]);
 
   const handleUpdate = async (payload) => {
-  const token = localStorage.getItem("access_token");
+    const token = localStorage.getItem("access_token");
 
-  try {
-    
-    Swal.fire({
-      title: "Updating employee...",
-      text: "Please wait",
-      allowOutsideClick: false,
-      didOpen: () => {
-        Swal.showLoading();
-      },
-      customClass: {
-        popup: 'modern-popup success-border',
-        title: 'modern-title',
-        htmlContainer: 'modern-text'
+    try {
+      Swal.fire({
+        title: "Updating employee...",
+        text: "Please wait",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading();
+        },
+        customClass: {
+          popup: "modern-popup success-border",
+          title: "modern-title",
+          htmlContainer: "modern-text",
+        },
+      });
+
+      const res = await fetch(`${BASE_URL}/employee/${id}/update`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+
+      if (!res.ok) throw new Error(data.detail || "failled to update");
+
+      await Swal.fire({
+        icon: "success",
+        title: "Updated",
+        text: "Employee updated successfully.",
+        timer: 1500,
+        showConfirmButton: false,
+        customClass: {
+          popup: "modern-popup success-border",
+          title: "modern-title",
+          htmlContainer: "modern-text",
+        },
+      });
+
+      navigate("/admin/view-employee");
+      return true;
+    } catch (error) {
+      console.error(error);
+
+      await Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message,
+      });
+
+      return false;
     }
-    });
-
-    const res = await fetch(`${BASE_URL}/employee/${id}/update`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(payload),
-    });
-    const data=await res.json()
-
-    if (!res.ok) throw new Error(data.detail ||"failled to update");
-
-   
-    await Swal.fire({
-      icon: "success",
-      title: "Updated",
-      text: "Employee updated successfully.",
-      timer: 1500,
-      showConfirmButton: false,
-      customClass: {
-        popup: 'modern-popup success-border',
-        title: 'modern-title',
-        htmlContainer: 'modern-text'
-    }
-    });
-
-    navigate("/admin/view-employee");
-    return true;
-
-  } catch (error) {
-    console.error(error);
-
-    
-    await Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: error.message,
-    });
-
-    return false;
-  }
-};
-
+  };
 
   return (
     <div>
       <Header />
-      <div className='edit-employee'>
-        <div className='edit-heading'>
-        
-        <div className="back-row">
-                  
-                  <IoIosArrowBack 
-                      className='back-btn' 
-                      onClick={() => navigate('/admin/view-employee')} 
-                    />
-
-                </div>
-          <h3>Edit Employee</h3>
+      <div className="edit-employee">
+        <div className="edit-heading">
+          <div className="back-row">
+            <IoIosArrowBack
+              className="back-btn"
+              onClick={() => navigate("/admin/view-employee")}
+            />
           </div>
+          <h3>Edit Employee</h3>
+        </div>
 
         {employee && (
           <EmployeeModel

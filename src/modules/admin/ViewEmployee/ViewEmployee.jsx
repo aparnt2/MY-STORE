@@ -1,174 +1,158 @@
-import React, { useEffect, useState } from 'react'
-import Header from '../../../Components/Header/AdminHeader'
-import { data, Navigate, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import Header from "../../../Components/Header/AdminHeader";
+import { data, Navigate, useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
-import { IoIosArrowBack } from "react-icons/io"
+import { IoIosArrowBack } from "react-icons/io";
 import { MdDelete } from "react-icons/md";
-import './ViewEmployee.css'
+import "./ViewEmployee.css";
 import Swal from "sweetalert2";
 
-
 function ViewEmployee() {
-    const navigate=useNavigate()
-    const BASE_URL=import.meta.env.VITE_BASE_URL
-    const[employees,setEmployees]=useState([])
-    useEffect(()=>{
+  const navigate = useNavigate();
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const [employees, setEmployees] = useState([]);
+  useEffect(() => {
+    const fetEmployees = async () => {
+      const token = localStorage.getItem("access_token");
 
-      const fetEmployees=async()=>{
-        const token=localStorage.getItem('access_token')
-       
-        try{
-          
-            const res=await fetch(`${BASE_URL}/employee/all`,{
-              
-              headers:{
-                'Content-Type':'application/json',
-                'Authorization':`Bearer ${token}`
-              },
-              
-            })
-            
-              const data= await res.json()
-              console.log(data);
-              
-            if(res.ok){
-                 setEmployees(data)
-            }
-           
-           
-            
-            
+      try {
+        const res = await fetch(`${BASE_URL}/employee/all`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-        }catch(err){
-          console.log(err);
-          
+        const data = await res.json();
+        console.log(data);
 
+        if (res.ok) {
+          setEmployees(data);
         }
+      } catch (err) {
+        console.log(err);
       }
-      fetEmployees()
+    };
+    fetEmployees();
+  }, []);
 
-    },[])
-
-   const handleDelete = async (id) => {
-  const result = await Swal.fire({
-    title: "Are you sure?",
-    text: "This employee will be permanently deleted!",
-    icon: "warning",
-    showCancelButton: true,
-   buttonsStyling: false,
-    confirmButtonText: "Yes, delete it!",
-    customClass: {
-      popup: 'modern-popup warning-border',
-      title: 'modern-title',
-      htmlContainer: 'modern-text',
-      confirmButton: 'modern-btn btn-danger',
-      cancelButton: 'modern-btn btn-secondary'
-    }
-  });
-
-  if (!result.isConfirmed) return;
-
-  const token = localStorage.getItem("access_token");
-
-  try {
-    const res = await fetch(`${BASE_URL}/employee/${id}/delete`, {
-      method: "post",
-      headers: {
-        Authorization: `Bearer ${token}`,
+  const handleDelete = async (id) => {
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "This employee will be permanently deleted!",
+      icon: "warning",
+      showCancelButton: true,
+      buttonsStyling: false,
+      confirmButtonText: "Yes, delete it!",
+      customClass: {
+        popup: "modern-popup warning-border",
+        title: "modern-title",
+        htmlContainer: "modern-text",
+        confirmButton: "modern-btn btn-danger",
+        cancelButton: "modern-btn btn-secondary",
       },
     });
 
-    if (!res.ok) throw new Error("Delete failed");
+    if (!result.isConfirmed) return;
 
-    setEmployees(prev => prev.filter(emp => emp.emp_id !== id));
+    const token = localStorage.getItem("access_token");
 
-    
-    Swal.fire({
-      icon: "success",
-      title: "Deleted!",
-      text: "Employee removed successfully.",
-      timer: 1500,
-      showConfirmButton: false,
-      customClass: {
-      popup: 'modern-popup success-border',
-      title: 'modern-title',
-      htmlContainer: 'modern-text'
+    try {
+      const res = await fetch(`${BASE_URL}/employee/${id}/delete`, {
+        method: "post",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!res.ok) throw new Error("Delete failed");
+
+      setEmployees((prev) => prev.filter((emp) => emp.emp_id !== id));
+
+      Swal.fire({
+        icon: "success",
+        title: "Deleted!",
+        text: "Employee removed successfully.",
+        timer: 1500,
+        showConfirmButton: false,
+        customClass: {
+          popup: "modern-popup success-border",
+          title: "modern-title",
+          htmlContainer: "modern-text",
+        },
+      });
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to delete employee.",
+        customClass: {
+          popup: "modern-popup error-border",
+          title: "modern-title",
+          htmlContainer: "modern-text",
+          confirmButton: "modern-btn btn-danger",
+        },
+      });
     }
-    });
-
-  } catch (err) {
-    
-    Swal.fire({
-      icon: "error",
-      title: "Error",
-      text: "Failed to delete employee.",
-      customClass: {
-      popup: 'modern-popup error-border',
-      title: 'modern-title',
-      htmlContainer: 'modern-text',
-      confirmButton: 'modern-btn btn-danger'
-    }
-    });
-  }
-};
+  };
 
   return (
     <div>
-        <Header/>
-        <div className='view-employee'>
-
-        <div className='backarraow-employee'>
+      <Header />
+      <div className="view-employee">
+        <div className="backarraow-employee">
           <IoIosArrowBack
-                      className='back-icon'
-                      onClick={() => navigate('/dashboard')}
-                    />
+            className="back-icon"
+            onClick={() => navigate("/dashboard")}
+          />
           <h3>Employees List</h3>
         </div>
-        <div className='employee-table-wrapper'>
-        <table className='employee-table'>
-          <thead>
-            <tr>
-              
-              <th>Name</th>
-              <th>Username</th>
-              <th>Phone</th>
-              <th>Department</th>
-              <th>Role</th>
-              
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {employees.map((e)=>(
-              <tr key={e.emp_id}>
-                
-                <td>{e.name}</td>
-                 <td>{e.user.username}</td>
-                <td>{e.phone_no}</td>
-                <td>{e.department.name}</td>
-                <td>{e.role.role_name}</td>
-               
-                <td>
-                  <button className="edit-btn" onClick={()=>navigate(`/admin/edit-employee/${e.emp_id}`)}>
-                    <FaEdit size={16} />
-                  </button>
-                 <button className="delete-btn" onClick={() => handleDelete(e.emp_id)}>
+        <div className="employee-table-wrapper">
+          <table className="employee-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Phone</th>
+                <th>Department</th>
+                <th>Role</th>
 
-                    <MdDelete size={16}/>
-
-                  </button>
-                </td>
-
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
+            </thead>
+            <tbody>
+              {employees.map((e) => (
+                <tr key={e.emp_id}>
+                  <td>{e.name}</td>
+                  <td>{e.user.username}</td>
+                  <td>{e.phone_no}</td>
+                  <td>{e.department.name}</td>
+                  <td>{e.role.role_name}</td>
 
-        </table>
+                  <td>
+                    <button
+                      className="edit-btn"
+                      onClick={() =>
+                        navigate(`/admin/edit-employee/${e.emp_id}`)
+                      }
+                    >
+                      <FaEdit size={16} />
+                    </button>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(e.emp_id)}
+                    >
+                      <MdDelete size={16} />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-      
     </div>
-  )
+  );
 }
 
-export default ViewEmployee
+export default ViewEmployee;

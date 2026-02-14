@@ -6,11 +6,11 @@
   align-items: center;
   justify-content: space-between;
 
-  background: #0F1B3D;
+  background: #0f1b3d;
 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 
-  position: sticky;   /* stays in flow */
+  position: sticky; /* stays in flow */
   top: 0;
   z-index: 1000;
 
@@ -38,13 +38,12 @@
 
 /* Navbar center fix */
 .header-section-link {
-  background:  rgba(255,255,255,0.18);;
+  background: rgba(255, 255, 255, 0.18);
   padding: 6px 10px;
   border-radius: 999px;
 }
 .header-section-link a {
-    color: white;
-  
+  color: white;
 }
 
 /* User section */
@@ -65,7 +64,7 @@
   padding: 5px 12px;
   border-radius: 999px;
 
-  background: rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.18);
   color: white;
 
   font-size: 13px;
@@ -116,7 +115,7 @@
 }
 
 .logout-sec:hover {
- transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(239,68,68,0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(239, 68, 68, 0.4);
   filter: brightness(1.05);
 }

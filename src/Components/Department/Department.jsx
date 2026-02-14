@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import './Department.css';
+import "./Department.css";
 
 function Department({ dep, onEdit, onDelete }) {
   return (
@@ -9,16 +9,14 @@ function Department({ dep, onEdit, onDelete }) {
       <table className="data-table">
         <thead>
           <tr>
-           
             <th>Code</th>
             <th>Name</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {dep.map(d => (
+          {dep.map((d) => (
             <tr key={d.id}>
-             
               <td>{d.code}</td>
               <td>{d.name}</td>
               <td>
