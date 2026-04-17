@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate,Link } from "react-router-dom";
-import "./login.css";
+import "./Login.css";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import Swal from "sweetalert2";
 
